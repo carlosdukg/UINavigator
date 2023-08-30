@@ -1,0 +1,76 @@
+{
+  "login": {
+    "url": "https://rcda2000s4web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_USLG",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.TopMenu",
+        "path": "MySelf>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.MySelf.PersonalMenu",
+        "path": "Personal>AddressNameChange"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_btnEdit",
+          "type": "buttonClick",
+          "value": null,
+          "validateControls": {
+            "visibleControls": [ "ctl00_infoMsg" ],
+            "requiredControls": [],
+            "disabledControls": []
+          },
+          "infoMessages": [
+            "Any changes made to your information may require additional review/approvals. Please allow 1 – 2 pay cycles for changes to reflect."
+          ]
+        },
+        {
+          "id": "ctl00_Content_ContactInfoFormView_cbSmartTaxManualOverride",
+          "type": "checkbox",
+          "value": "",
+          "validateControls": {
+            "visibleControls": [],
+            "requiredControls": [],
+            "disabledControls": []
+          }
+        },
+        {
+          "id": "ctl00_Content_DetailedPersonFV_txbNameLast",
+          "type": "input",
+          "value": "new value",
+          "infoMessages": [
+            "Any changes made to your information may require additional review/approvals. Please allow 1 – 2 pay cycles for changes to reflect.",
+            "Legal Name must match the name on your social security (SSN) card. Please upload a copy of your SSN card to your document page under Identification to expedite the approval process."
+          ]
+        },
+        {
+          "id": "ctl00_Content_ContactInfoFormView_txbAddressCity",
+          "type": "input",
+          "value": "new value",
+          "infoMessages": [
+            "Any changes made to your information may require additional review/approvals. Please allow 1 – 2 pay cycles for changes to reflect.",
+            "Legal Name must match the name on your social security (SSN) card. Please upload a copy of your SSN card to your document page under Identification to expedite the approval process.",
+            "Changing your current information may impact your taxes. Please review/complete a new State or Local tax withholding form."
+          ]
+        }
+      ]
+    }
+  ]
+}

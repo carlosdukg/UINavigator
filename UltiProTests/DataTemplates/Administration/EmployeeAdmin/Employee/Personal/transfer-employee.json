@@ -1,0 +1,180 @@
+{
+  "login": {
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_CABP",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.TopMenu",
+        "path": "Administration>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.Administration.AdministrationMenu",
+        "path": "EmployeeAdmin>MyEmployees"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "value": "1:000012364"
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "UINavigator.Models.Menus.EmployeeMenu",
+        "path": "Personal>EmployeeSummary"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "",
+          "delayInSeconds": 2
+        },
+        {
+          "id": "rightMenu",
+          "type": "RightMenuLink",
+          "value": "1:9"
+        },
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "last"
+        }
+      ]
+    },
+    {
+      "type": "Wizard",
+      "wizardSteps": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "",
+          "delayInSeconds": 2
+        },
+        {
+          "name": "start",
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_StartFV_csNewCompanyForTransfer",
+              "type": "dropdown",
+              "value": "HDLBX",
+              "delayInSeconds": 1
+            },
+            {
+              "id": "calTransferDate_user",
+              "type": "input",
+              "value": "09/02/2023"
+            }
+          ]
+        },
+        {
+          "name": "jobs_payroll",
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_FormView1_csPayGroup",
+              "type": "dropdown",
+              "value": "CORPBI",
+              "delayInSeconds": 1
+            },
+            {
+              "id": "calTransferDate_user",
+              "type": "input",
+              "value": "09/01/2023"
+            }
+          ]
+        },
+        {
+          "name": "personal",
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "federalIncome",
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "stateTaxes",
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "localTaxes",
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_uc_LocalTaxWorkInDetail_rbWorkInTaxResident",
+              "type": "radio",
+              "delayInSeconds": 1
+            },
+            {
+              "id": "ctl00_Content_uc_LocalTaxWorkInDetail_GridViewLocalWorkInTaxes_ctl02_ddlLTFilingStatus",
+              "type": "dropdown",
+              "value": "M"
+            }
+          ]
+        },
+        {
+          "name": "dates",
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "pto",
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "Summary",
+          "delayInSeconds": 0,
+          "moveNext": false,
+          "controls": []
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ctl00_submitProcessMessage",
+          "type": "div",
+          "value": "You must select Submit to complete this request."
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "",
+          "type": "UrlLocation",
+          "value": "https://rcda2000s2web.dlas1.ucloud.int/default.aspx"
+        }
+      ]
+    }
+  ]
+}

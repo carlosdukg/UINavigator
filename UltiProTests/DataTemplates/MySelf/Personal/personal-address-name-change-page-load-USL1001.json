@@ -1,0 +1,45 @@
+{
+  "login": {
+    "url": "https://rcda2000s4web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_USLG",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.TopMenu",
+        "path": "MySelf>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.MySelf.PersonalMenu",
+        "path": "Personal>AddressNameChange"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_btnEdit",
+          "type": "buttonClick",
+          "value": null,
+          "validateControls": {
+            "visibleControls": [ "ctl00_infoMsg" ],
+            "requiredControls": [],
+            "disabledControls": []
+          },
+          "infoMessages": [ "Any changes made to your information may require additional review/approvals. Please allow 1 – 2 pay cycles for changes to reflect." ]
+        }
+      ]
+    }
+  ]
+}

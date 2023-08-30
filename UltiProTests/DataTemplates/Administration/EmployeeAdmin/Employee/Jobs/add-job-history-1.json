@@ -1,0 +1,89 @@
+{
+  "login": {
+    "url": "https://rcda2000s1web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.TopMenu",
+        "path": "Administration>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.AdministrationMenu",
+        "path": "EmployeeAdmin>MyEmployees"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "value": "Baldwin, Sam J."
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "UINavigator.Models.Menus.EmployeeMenu",
+        "path": "Jobs>JobHistory"
+      }
+    },
+    {
+      "type": "PopUp",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_btnAdd",
+          "type": "buttonClick",
+          "delay":  3
+        },
+        {
+          "id": "ctl00_Content_frmJobHistoryAddChg_csReason",
+          "type": "Dropdown",
+          "value": "",
+          "validateControls": {
+            "controlValues": [
+              "",
+              "100 - New hire",
+              "101 - Rehire",
+              "200 - Merit Increase",
+              "201 - Salary Adjustment",
+              "202 - Salary Reduction",
+              "203 - Cost of Living Adjustment",
+              "300 - Promotion",
+              "301 - Job Reclassification",
+              "302 - Demotion",
+              "400 - Hours Increase",
+              "401 - Hours Reduction",
+              "500 - Transfer",
+              "501 - Reorganization",
+              "600 - Market Adjustment",
+              "601 - Employee Request",
+              "700 - Status Change F/T",
+              "800 - Termination"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

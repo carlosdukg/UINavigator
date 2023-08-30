@@ -1,0 +1,139 @@
+{
+  "login": {
+    "url": "https://rcda2000s8web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_DPCO",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.TopMenu",
+        "path": "MySelf>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.MySelf.PayMenu",
+        "path": "Pay>DirectDeposit"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_btnAdd",
+          "type": "buttonClick",
+          "value": null,
+          "validateControls": {
+            "visibleControls": [ "ctl00_infoMsg" ],
+            "requiredControls": [
+              "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbRoutingNumber",
+              "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber",
+              "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber",
+              "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbAccountNumber"
+            ],
+            "disabledControls": []
+          },
+          "infoMessages": [
+            "Available Balance should be selected on one account to avoid receiving a paper check in the mail."
+          ]
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbAccountNumber",
+          "type": "input",
+          "value": "262654"
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber",
+          "type": "input",
+          "value": "262655",
+          "errorMessages": [
+            "The fields do not match."
+          ]
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null,
+          "errorMessages": [
+            "The fields do not match."
+          ]
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber",
+          "type": "input",
+          "value": "262654"
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbRoutingNumber",
+          "type": "input",
+          "value": "011401533"
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber",
+          "type": "input",
+          "value": "011401534",
+          "errorMessages": [
+            "The fields do not match."
+          ]
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null,
+          "errorMessages": [
+            "The fields do not match."
+          ]
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber",
+          "type": "input",
+          "value": "011401533"
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_csAccountType",
+          "type": "dropdown",
+          "value": "C"
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbDollarAmt",
+          "type": "input",
+          "value": "1000"
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "IgnoreBtn",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "ctl00_submitProcessMessage",
+          "type": "div",
+          "value": "You must select Submit to complete this request."
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "",
+          "type": "UrlLocation",
+          "value": "https://rcda2000s8web.dlas1.ucloud.int/default.aspx"
+        }
+      ]
+    }
+  ]
+}

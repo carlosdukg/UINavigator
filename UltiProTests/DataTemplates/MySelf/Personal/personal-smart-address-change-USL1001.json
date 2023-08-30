@@ -1,0 +1,74 @@
+{
+  "login": {
+    "url": "https://rcda2000s4web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_USLG",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.TopMenu",
+        "path": "MySelf>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.MySelf.PersonalMenu",
+        "path": "Personal>AddressNameChange"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_btnEdit",
+          "type": "buttonClick",
+          "value": null,
+          "validateControls": {
+            "visibleControls": [ "ctl00_infoMsg" ],
+            "requiredControls": [],
+            "disabledControls": []
+          },
+          "infoMessages": [
+            "Any changes made to your information may require additional review/approvals. Please allow 1 – 2 pay cycles for changes to reflect."
+          ]
+        },
+        {
+          "id": "taxCodeFinderAddressSearch_input",
+          "type": "AddressSearch",
+          "value": "2000 Main St, Fort Lauderdale, FL, 33326, USA",
+          ".": null,
+          "infoMessages": [
+            "Any changes made to your information may require additional review/approvals. Please allow 1 – 2 pay cycles for changes to reflect.",
+            "Changing your current information may impact your taxes. Please review/complete a new State or Local tax withholding form."
+          ],
+          "DelayInSeconds": 8
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "",
+          "DelayInSeconds": 8
+        },
+        {
+          "id": "ctl00_submitProcessMessage",
+          "type": "div",
+          "value": "You must select Submit to complete this request."
+        }
+      ]
+    }
+  ]
+}

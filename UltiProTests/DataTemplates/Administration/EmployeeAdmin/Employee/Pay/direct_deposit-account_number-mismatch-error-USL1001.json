@@ -1,0 +1,83 @@
+{
+  "login": {
+    "url": "https://rcda2000s4web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_USLG",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.TopMenu",
+        "path": "Administration>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.AdministrationMenu",
+        "path": "EmployeeAdmin>MyEmployees"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "value": "Alburn II, Al M."
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "EmployeeMenu",
+        "path": "Pay>DirectDeposit"
+      }
+    },
+    {
+      "type": "PopUp",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_btnAdd",
+          "type": "buttonClick",
+          "value": null,
+          "validateControls": {
+            "visibleControls": [],
+            "requiredControls": [
+              "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber",
+              "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber"
+            ],
+            "disabledControls": []
+          }
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbAccountNumber",
+          "type": "input",
+          "value": "262654"
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber",
+          "type": "input",
+          "value": "262655",
+          "errorMessages": [
+            "Your account numbers do not match. Please verify and re-enter."
+          ]
+        }
+      ]
+    }
+  ]
+}
