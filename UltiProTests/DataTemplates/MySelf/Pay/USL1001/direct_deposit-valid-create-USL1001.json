@@ -1,0 +1,90 @@
+ {
+  "login": {
+    "url": "https://rcda2000s4web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_USLG",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.TopMenu",
+        "path": "MySelf>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.MySelf.PayMenu",
+        "path": "Pay>DirectDeposit"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_btnAdd",
+          "type": "buttonClick",
+          "value": null,
+          "validateControls": {
+            "visibleControls": [ "ctl00_infoMsg" ],
+            "requiredControls": [
+              "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber",
+              "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber"
+            ],
+            "disabledControls": []
+          },
+          "infoMessages": [
+            "Please allow 1 – 2 pay cycles for your account changes to be processed. Please consider keeping your old account open until the change is finalized, whenever possible."
+          ]
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbAccountNumber",
+          "type": "input",
+          "value": "262654"
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber",
+          "type": "input",
+          "value": "262654"
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbRoutingNumber",
+          "type": "input",
+          "value": "011401533"
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber",
+          "type": "input",
+          "value": "011401533"
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_csAccountType",
+          "type": "dropdown",
+          "value": "C"
+        },
+        {
+          "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbDollarAmt",
+          "type": "input",
+          "value": "1000"
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "IgnoreBtn",
+          "type": "buttonClick",
+          "value": null
+        }
+      ]
+    }
+  ]
+}

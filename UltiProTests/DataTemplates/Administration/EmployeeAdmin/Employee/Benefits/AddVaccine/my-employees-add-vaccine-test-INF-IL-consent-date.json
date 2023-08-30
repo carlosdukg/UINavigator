@@ -1,0 +1,122 @@
+{
+  "login": {
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_GIT",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.TopMenu",
+        "path": "Administration>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.AdministrationMenu",
+        "path": "EmployeeAdmin>MyEmployees"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "value": "Alburn II, Al M."
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "EmployeeMenu",
+        "path": "CareerEducation>EmployeeVaccinationTest"
+      }
+    },
+    {
+      "type": "popUp",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": null
+        },
+        {
+          "id": "ctl00_btnAdd",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "ctl00_Content_FormView1_csVaccinationTest",
+          "type": "dropdown",
+          "value": "FLU",
+          "validateControls": {
+            "visibleControls": [],
+            "requiredControls": [],
+            "disabledControls": []
+          }
+        },
+        {
+          "id": "calConsentDate_user",
+          "type": "calendar",
+          "value": "06/12/2023",
+          "validateControls": {
+            "visibleControls": [
+              "ctl00_Content_FormView1_csVaccinationTest",
+              "calConsentDate_user",
+              "ctl00_Content_FormView1_csManufacturerName",
+              "ctl00_Content_FormView1_txtLotNumber",
+              "ctl00_Content_FormView1_txtAdministeredBy",
+              "calVaccineAdminDate_user",
+              "ctl00_Content_FormView1_csLocationofImmunization",
+              "ctl00_Content_FormView1_ckbAttestationAck"
+            ],
+            "hiddenControls": [],
+            "requiredControls": [
+              "ctl00_Content_FormView1_csVaccinationTest",
+              "ctl00_Content_FormView1_csManufacturerName",
+              "calVaccineAdminDate_user"
+            ],
+            "notrequiredControls": [],
+            "disabledControls": [
+              "calDeclinationDate"
+            ]
+          }
+        },
+        {
+          "id": "calConsentDate_user",
+          "type": "calendar",
+          "value": "",
+          "validateControls": {
+            "visibleControls": [
+              "ctl00_Content_FormView1_csVaccinationTest",
+              "calConsentDate_user",
+              "ctl00_Content_FormView1_csManufacturerName",
+              "ctl00_Content_FormView1_txtLotNumber",
+              "ctl00_Content_FormView1_txtAdministeredBy",
+              "calVaccineAdminDate_user",
+              "ctl00_Content_FormView1_csLocationofImmunization",
+              "ctl00_Content_FormView1_ckbAttestationAck"
+            ],
+            "hiddenControls": [],
+            "requiredControls": [],
+            "notrequiredControls": [
+              "calVaccineAdminDate_user"
+            ],
+            "disabledControls": []
+          }
+        }
+      ]
+    }
+  ]
+}

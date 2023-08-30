@@ -1,0 +1,442 @@
+{
+  "login": {
+    "url": "https://rcda2000s8web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_DPCO",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.TopMenu",
+        "path": "Administration>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.AdministrationMenu",
+        "path": "EmployeeAdmin>MyEmployees>"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "last"
+        },
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "",
+          "delayInSeconds": 3
+        },
+        {
+          "id": "ctl00_btnAdd",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "last"
+        }
+      ]
+    },
+    {
+      "type": "Wizard",
+      "wizardSteps": [
+        {
+          "name": "start",
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_StartFV_csCompany",
+              "type": "dropdown",
+              "value": "HDLBX"
+            },
+            {
+              "id": "ctl00_Content_StartFV_txbSSN",
+              "type": "input",
+              "value": "method:GenerateSSN"
+            },
+            {
+              "id": "ctl00_Content_StartFV_txbSSNConfirmed",
+              "type": "input",
+              "value": "method:GenerateSSN"
+            },
+            {
+              "id": "ctl00_Content_StartFV_txbNameFirst",
+              "type": "input",
+              "value": "Kelly"
+            },
+            {
+              "id": "ctl00_Content_StartFV_txbNameLast",
+              "type": "input",
+              "value": "Slater"
+            }
+          ]
+        },
+        {
+          "name": "personal",
+          "delayInSeconds": 3,
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_NewHirePersonalFV_txbAddressLine1",
+              "type": "input",
+              "value": "101 SW 3 AVE"
+            },
+            {
+              "id": "ctl00_Content_NewHirePersonalFV_txbAddressCity",
+              "type": "input",
+              "value": "Miami"
+            },
+            {
+              "id": "ctl00_Content_NewHirePersonalFV_csAddressState",
+              "type": "dropdown",
+              "value": "NY"
+            },
+            {
+              "id": "ctl00_Content_NewHirePersonalFV_txbAddressZipCode",
+              "type": "input",
+              "value": "33025"
+            },
+            {
+              "name": "calDOB_user",
+              "type": "input",
+              "value": "01/01/2000"
+            },
+            {
+              "id": "ctl00_Content_NewHirePersonalFV_Gender",
+              "type": "dropdown",
+              "value": "M"
+            }
+          ]
+        },
+        {
+          "name": "dates",
+          "delayInSeconds": 2,
+          "moveNext": true,
+          "controls": [
+            {
+              "name": "calDateOfLastHire_user",
+              "type": "input",
+              "value": "04/01/2023"
+            }
+          ]
+        },
+        {
+          "name": "payroll",
+          "delayInSeconds": 2,
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_FormView1_csJob",
+              "type": "dropdown",
+              "value": "ADMIN"
+            },
+            {
+              "id": "ctl00_Content_FormView1_cdlLocation",
+              "type": "dropdown",
+              "value": "NYN",
+              "delayInSeconds": 3
+            },
+            {
+              "id": "ctl00_Content_FormView1_csRatesPer",
+              "type": "dropdown",
+              "value": "H"
+            },
+            {
+              "id": "ctl00_Content_FormView1_csPayGroup",
+              "type": "dropdown",
+              "value": "CORPBI"
+            },
+            {
+              "id": "ctl00_Content_FormView1_csEarningGroup",
+              "type": "dropdown",
+              "value": "ADMIN"
+            },
+            {
+              "id": "ctl00_Content_FormView1_csDeductionGroups",
+              "type": "dropdown",
+              "value": "ADMIN"
+            },
+            {
+              "id": "ctl00_Content_FormView1_csEmployeeType",
+              "type": "dropdown",
+              "value": "REG"
+            },
+            {
+              "id": "ctl00_Content_FormView1_csHourlySalary",
+              "type": "dropdown",
+              "value": "S"
+            },
+            {
+              "id": "ctl00_Content_FormView1_csFullOrPartTime",
+              "type": "dropdown",
+              "value": "F"
+            }
+          ]
+        },
+        {
+          "name": "attendance",
+          "delayInSeconds": 2,
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_fvUTAEmployee_csEEType",
+              "type": "dropdown",
+              "value": "NonUTAEmployee"
+            }
+          ]
+        },
+        {
+          "name": "directDeposit",
+          "delayInSeconds": 2,
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ContentFrame",
+              "type": "switchFrame",
+              "value": ""
+            },
+            {
+              "id": "ctl00_btnAdd",
+              "type": "buttonClick",
+              "value": null,
+              "validateControls": {
+                "visibleControls": [ "ctl00_infoMsg" ]
+              },
+              "infoMessages": [
+                "Available Balance should be selected on one account to avoid receiving a paper check in the mail."
+              ]
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbAccountNumber",
+              "type": "input",
+              "value": "262654"
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber",
+              "type": "input",
+              "value": "262654"
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbRoutingNumber",
+              "type": "input",
+              "value": "011401533"
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber",
+              "type": "input",
+              "value": "011401533"
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_csAccountType",
+              "type": "dropdown",
+              "value": "C"
+            },
+            {
+              "id": "ctl00_btnNext",
+              "type": "buttonClick",
+              "value": null,
+              "errorMessages": []
+            }
+          ]
+        },
+        {
+          "name": "federalIncomeTax",
+          "delayInSeconds": 2,
+          "movePrev": true,
+          "controls": []
+        },
+        {
+          "name": "directDeposit1",
+          "delayInSeconds": 2,
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositSummary_grvEEDirectDeposit",
+              "type": "GridViewAndSelect",
+              "value": "xxxxxxxxxxxxxxxxxx2654",
+              "hiddenControls": [
+                "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber",
+                "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber"
+              ],
+              "infoMessages": [
+                "Available Balance should be selected on one account to avoid receiving a paper check in the mail."
+              ]
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbAccountNumber",
+              "type": "input",
+              "value": "555000000",
+              "visibleControls": [
+                "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber"
+              ],
+              "requiredControls": [
+                "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber",
+                "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbAccountNumber",
+                "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbRoutingNumber"
+              ]
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbAccountNumber",
+              "type": "input",
+              "value": "262654"
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber",
+              "type": "input",
+              "value": "262655",
+              "errorMessages": [
+                "The fields do not match."
+              ]
+            },
+            {
+              "id": "ctl00_btnSave",
+              "type": "buttonClick",
+              "value": null,
+              "errorMessages": [
+                "The fields do not match."
+              ]
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfAccountNumber",
+              "type": "input",
+              "value": "262654"
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber",
+              "type": "input",
+              "value": "091000019",
+              "visibleControls": [
+                "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber"
+              ],
+              "requiredControls": [
+                "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber"
+              ]
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbRoutingNumber",
+              "type": "input",
+              "value": "011401533"
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber",
+              "type": "input",
+              "value": "011401534",
+              "errorMessages": [
+                "The fields do not match."
+              ]
+            },
+            {
+              "id": "ctl00_btnSave",
+              "type": "buttonClick",
+              "value": null,
+              "errorMessages": [
+                "The fields do not match."
+              ]
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_txbConfRoutingNumber",
+              "type": "input",
+              "value": "011401533"
+            },
+            {
+              "id": "ctl00_Content_uc_eePayrollDirectDepositDetail_fveePayrollDirectDepositDetail_csAccountType",
+              "type": "dropdown",
+              "value": "C"
+            },
+            {
+              "id": "ctl00_btnNext",
+              "type": "buttonClick",
+              "value": null,
+              "errorMessages": []
+            }
+          ]
+        },
+        {
+          "name": "federalIncomeTax",
+          "delayInSeconds": 2,
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "stateTax",
+          "delayInSeconds": 8,
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_fv_csResidentCounty",
+              "type": "dropdown",
+              "value": "WESTCHESTER"
+            }
+          ]
+        },
+        {
+          "name": "localTax",
+          "delayInSeconds": 2,
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_uc_LocalTaxWorkInDetail_rbWorkInTaxResident",
+              "type": "radio"
+            },
+            {
+              "id": "ctl00_Content_uc_LocalTaxWorkInDetail_GridViewLocalWorkInTaxes_ctl02_ddlLTFilingStatus",
+              "type": "dropdown",
+              "value": "M"
+            },
+            {
+              "id": "ctl00_Content_uc_LocalTaxResidentDetail_fvLocalResidentTaxes_ddlResLocalTaxCode",
+              "type": "dropdown",
+              "value": "NY003"
+            },
+            {
+              "id": "ctl00_Content_uc_LocalTaxResidentDetail_fvLocalResidentTaxes_ddlResLTFilingStatus",
+              "type": "dropdown",
+              "value": "M"
+            }
+          ]
+        },
+        {
+          "name": "PTO",
+          "delayInSeconds": 2,
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "Summary",
+          "delayInSeconds": 0,
+          "moveNext": false,
+          "controls": []
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ctl00_submitProcessMessage",
+          "type": "div",
+          "value": "You must select Submit to complete this request."
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "",
+          "type": "UrlLocation",
+          "value": "https://rcda2000s6web.dlas1.ucloud.int/default.aspx"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "login": {
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_GIT",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.TopMenu",
+        "path": "Administration>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.AdministrationMenu",
+        "path": "EmployeeAdmin>MyEmployees"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "value": "Alburn II, Al M."
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "EmployeeMenu",
+        "path": "CareerEducation>EmployeeVaccinationTest"
+      }
+    },
+    {
+      "type": "popUp",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": null
+        },
+        {
+          "id": "ctl00_btnAdd",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "ctl00_Content_FormView1_csVaccinationTest",
+          "type": "dropdown",
+          "value": "TB",
+          "validate": {
+            "visibleControls": [],
+            "requiredControls": [],
+            "disabledControls": []
+          }
+        },
+        {
+          "id": "ctl00_Content_FormView1_csTestType",
+          "type": "dropdown",
+          "value": "PT",
+          "validateControls": {
+            "visibleControls": [
+              "ctl00_Content_FormView1_lblConsentDate",
+              "ctl00_Content_FormView1_lblTBResults",
+              "ctl00_Content_FormView1_lblInitialHistoryofTST",
+              "ctl00_Content_FormView1_lblDateScreening",
+              "ctl00_Content_FormView1_lblDateExposure",
+              "ctl00_Content_FormView1_lblSize",
+              "ctl00_Content_FormView1_lblReftoHealthDeptPos",
+              "ctl00_Content_FormView1_ckbAttestationAck"
+            ],
+            "requiredControls": [],
+            "disabledControls": []
+          }
+        },
+        {
+          "id": "ctl00_Content_FormView1_csTBResults",
+          "type": "dropdown",
+          "value": "POS",
+          "validateControls": {
+            "visibleControls": [
+              "ctl00_Content_FormView1_lblConsentDate",
+              "ctl00_Content_FormView1_lblTBResults",
+              "ctl00_Content_FormView1_lblInitialHistoryofTST",
+              "ctl00_Content_FormView1_lblDateScreening",
+              "ctl00_Content_FormView1_lblDateExposure",
+              "ctl00_Content_FormView1_lblSize",
+              "ctl00_Content_FormView1_lblReftoHealthDeptPos",
+              "ctl00_Content_FormView1_ckbAttestationAck"
+            ],
+            "requiredControls": [
+              "ctl00_Content_FormView1_txtSize",
+              "calReftoHealthDeptPos_user",
+              "ctl00_Content_FormView1_csVaccinationTest",
+              "ctl00_Content_FormView1_csTestType",
+              "ctl00_Content_FormView1_csTBResults"
+            ],
+            "disabledControls": []
+          }
+        },
+        {
+          "id": "ctl00_Content_FormView1_csTBResults",
+          "type": "dropdown",
+          "value": "NEG",
+          "validateControls": {
+            "visibleControls": [
+              "ctl00_Content_FormView1_lblConsentDate",
+              "ctl00_Content_FormView1_lblTBResults",
+              "ctl00_Content_FormView1_lblInitialHistoryofTST",
+              "ctl00_Content_FormView1_lblDateScreening",
+              "ctl00_Content_FormView1_ckbAttestationAck"
+            ],
+            "requiredControls": [
+              "ctl00_Content_FormView1_csVaccinationTest",
+              "ctl00_Content_FormView1_csTestType",
+              "ctl00_Content_FormView1_csTBResults"
+            ],
+            "disabledControls": []
+          }
+        },
+        {
+          "id": "ctl00_Content_FormView1_csTBResults",
+          "type": "dropdown",
+          "value": "ID",
+          "validateControls": {
+            "visibleControls": [
+              "ctl00_Content_FormView1_lblConsentDate",
+              "ctl00_Content_FormView1_lblTBResults",
+              "ctl00_Content_FormView1_lblInitialHistoryofTST",
+              "ctl00_Content_FormView1_lblDateScreening",
+              "ctl00_Content_FormView1_lblDateExposure",
+              "ctl00_Content_FormView1_lblReftoHealthDeptPos",
+              "ctl00_Content_FormView1_ckbAttestationAck"
+            ],
+            "requiredControls": [
+              "ctl00_Content_FormView1_csVaccinationTest",
+              "ctl00_Content_FormView1_csTestType",
+              "ctl00_Content_FormView1_csTBResults",
+              "calReftoHealthDeptPos_user"
+            ],
+            "disabledControls": []
+          }
+        }
+      ]
+    }
+  ]
+}

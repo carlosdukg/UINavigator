@@ -1,0 +1,88 @@
+{
+  "login": {
+    "url": "https://rcda2000s4web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_USLG",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.TopMenu",
+        "path": "MySelf>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Models.Menus.MySelf.PersonalMenu",
+        "path": "Personal>AddressNameChange"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_btnEdit",
+          "type": "buttonClick",
+          "value": null,
+          "validateControls": {
+            "visibleControls": [ "ctl00_infoMsg" ],
+            "requiredControls": [],
+            "disabledControls": []
+          },
+          "infoMessages": [
+            "Any changes made to your information may require additional review/approvals. Please allow 1 – 2 pay cycles for changes to reflect."
+          ]
+        },
+        {
+          "id": "ctl00_Content_ContactInfoFormView_txbAddressEmailMove",
+          "type": "input",
+          "value": "jeannef@newmail.net"
+        },
+        {
+          "id": "ctl00_Content_ContactInfoFormView_AlternateEmail",
+          "type": "input",
+          "value": "jeannef@newaltmail.net"
+        },
+        {
+          "id": "ctl00_Content_ContactInfoFormView_txbHomePhone",
+          "type": "input",
+          "value": "(770) 321-0000"
+        },
+        {
+          "id": "ctl00_Content_DetailedPersonFV_txbNameLast",
+          "type": "input",
+          "value": "new value",
+          "infoMessages": [
+            "Any changes made to your information may require additional review/approvals. Please allow 1 – 2 pay cycles for changes to reflect.",
+            "Legal Name must match the name on your social security (SSN) card. Please upload a copy of your SSN card to your document page under Identification to expedite the approval process."
+          ],
+          "DelayInSeconds": 8
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "",
+          "DelayInSeconds": 8
+        },
+        {
+          "id": "ctl00_submitProcessMessage",
+          "type": "div",
+          "value": "You must select Submit to complete this request."
+        }
+      ]
+    }
+  ]
+}

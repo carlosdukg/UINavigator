@@ -1,0 +1,135 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
+    <PackageReference Include="coverlet.collector" Version="3.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UINavigator\UINavigator.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\add-job-history-2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\add-job-history-1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\change-job-2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\MyEmployees\add-employee-edit-direct-deposit.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\MyEmployees\add-employee-add-direct-deposit.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Personal\transfer-employee.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\MyEmployees\my-employees-add-auto.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MyTeam\MyEmployees\add-canadian-employee.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MyTeam\MyEmployees\add-employee-edit-direct-deposit.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MyTeam\MyEmployees\add-employee-add-direct-deposit.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\MyEmployees\add-employee.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Benefits\AddVaccine\my-employees-add-vaccine-test-INF-IL-decline-date_required_all.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Benefits\AddVaccine\my-employees-add-vaccine-test-INF-IL-decline-date_required_dates.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Benefits\AddVaccine\my-employees-add-vaccine-test-INF-IL-decline-date_valid.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Benefits\AddVaccine\my-employees-add-vaccine-test-INF-IL-consent-date.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Benefits\AddVaccine\my-employees-add-vaccine-test-tb-pt-tb-results.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\change-job-salary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\change-job-1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Pay\DIS1013\direct_deposit-add-test.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Pay\DIS1013\direct_deposit-edit-test.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Pay\USL1001\direct_deposit-valid-update-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Pay\USL1001\direct_deposit-valid-create-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Pay\USL1001\direct_deposit-edit-page-display-conf-account-number-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Pay\USL1001\direct_deposit-edit-page-display-conf-routing-number-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Pay\USL1001\direct_deposit-edit-page-load-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Pay\direct_deposit-account_number-mismatch-error-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Pay\direct_deposit-routing_number-mismatch-error-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Pay\USL1001\direct_deposit-account_number-mismatch-error-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Pay\USL1001\direct_deposit-routing_number-mismatch-error-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Personal\personal-smart-address-change-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Personal\personal-name-address-change-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Personal\personal-name-change-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Personal\personal-address-name-change-page-load-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MySelf\Personal\personal-address-change-USL1001.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MyTeam\MyEmployees\add-employee.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MyTeam\MyEmployees\Employee\change-job-and-salary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
