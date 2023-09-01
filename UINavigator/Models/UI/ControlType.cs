@@ -18,6 +18,8 @@ namespace UINavigator.Models.UIModels
         AddressSearch,
         UrlLocation,
         RightMenuLink,
-        LookUp
+        LookUp,
+        Span,
+        Any
     }
 }

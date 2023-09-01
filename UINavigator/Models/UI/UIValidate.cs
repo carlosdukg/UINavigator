@@ -16,5 +16,7 @@ namespace UINavigator.Models.UI
         public string? ControlValue { get; set; }
 
         public List<string>? ControlValues { get; set; }
+
+        public UIValidateValidationObject? ValidationObject { get; set; }
     }
 }

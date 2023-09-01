@@ -39,7 +39,7 @@
       "type": "navigate",
       "navigation": {
         "IsPopUp": true,
-        "handler": "UINavigator.Models.Menus.EmployeeMenu",
+        "handler": "UINavigator.Menus.Administration.EmployeeMenu",
         "path": "Personal>EmployeeSummary"
       }
     },

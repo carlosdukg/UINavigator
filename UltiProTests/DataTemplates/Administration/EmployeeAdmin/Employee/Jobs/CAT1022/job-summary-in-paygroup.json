@@ -1,0 +1,95 @@
+{
+  "login": {
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_CABP",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.TopMenu",
+        "path": "Administration>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.Administration.AdministrationMenu",
+        "path": "EmployeeAdmin>MyEmployees"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "objectValue": {
+            "search": {
+              "findByContorlId": "GridView1_firstSelect_0",
+              "findByControlValue": "Last name",
+              "operatorControlId": "GridView1_Operator_0",
+              "operatorControlValue": "Contains",
+              "searchInputControlId": "GridView1_TextEntryFilterControlInputBox_0",
+              "searchInputControlValue": "Shawsburg",
+              "searchButtonControlId": "GridView1_filterButton"
+            },
+            "select": {
+              "colindex": 0,
+              "value": "Shawsburg, Nan M."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "UINavigator.Menus.Administration.EmployeeMenu",
+        "path": "Jobs>Compensation"
+      }
+    },
+    {
+      "type": "PopUp",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_FormView1_lblAnnual",
+          "type": "span",
+          "validateControls": {
+            "validationObject": {
+              "methodName": "CalculateAnnualSalaryC",
+              "methodControlParams": [
+                {
+                  "Id": "ctl00_Content_FormView1_lblHourly",
+                  "Type": "span"
+                },
+                {
+                  "Id": "ctl00_Content_FormView1_Label9",
+                  "Type": "span"
+                }
+              ],
+              "methodReturnType": "double",
+              "controlToValidateId": {
+                "Id": "ctl00_Content_FormView1_lblAnnualNewRate",
+                "Type": "span"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

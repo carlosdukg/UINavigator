@@ -28,6 +28,18 @@
     <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\add-job-history-1.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\change-job-salary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\job-history-detail-in-paygroup.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\job-summary-in-paygroup.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\job-summary-not-in-paygroup.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\change-job-2.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -70,7 +82,7 @@
     <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Benefits\AddVaccine\my-employees-add-vaccine-test-tb-pt-tb-results.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\change-job-salary.json">
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\change-salary.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\change-job-1.json">

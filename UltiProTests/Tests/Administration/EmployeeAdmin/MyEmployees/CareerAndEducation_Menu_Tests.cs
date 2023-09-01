@@ -7,7 +7,7 @@ using UltiProTests.Services;
 namespace UltiProTests.Tests.AdministrationTopMenu.EmployeeAdmin.MyEmployees
 {
     [TestClass]
-    public class EmployeeCareerAndEducationTests
+    public class CareerAndEducation_Menu_Tests
     {
         private IWebDriver? _driver;
         private ChromeWebDriver? _chormeDriver;

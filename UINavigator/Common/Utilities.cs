@@ -72,6 +72,15 @@ namespace UINavigator.Common
             return empnum;
         }
 
+        public double CalculateAnnualSalaryC(string? hour, string? rate)
+        {
+            if (hour != null && rate != null)
+            {
+                return double.Parse(hour) * double.Parse(rate) * 22;
+            }
+            return 0;
+        }
+
         /// <inheritdoc/>
         public UIWizardStep? GetWizardStep(Enum stepName, EntryAction entryAction)
         {

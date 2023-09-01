@@ -1,22 +1,22 @@
 {
   "login": {
-    "url": "https://rcda2000s1web.dlas1.ucloud.int/Login.aspx",
+    "url": "https://rcda2000s8web.dlas1.ucloud.int/Login.aspx",
     "isSSOUser": false,
-    "username": "fosterj",
+    "username": "fosterj_SBMM",
     "password": "password"
   },
   "actions": [
     {
       "type": "navigate",
       "navigation": {
-        "handler": "UINavigator.Models.Menus.TopMenu",
+        "handler": "UINavigator.Menus.TopMenu",
         "path": "Administration>"
       }
     },
     {
       "type": "navigate",
       "navigation": {
-        "handler": "UINavigator.Models.Menus.AdministrationMenu",
+        "handler": "UINavigator.Menus.Administration.AdministrationMenu",
         "path": "EmployeeAdmin>MyEmployees>"
       }
     },
@@ -71,12 +71,12 @@
             {
               "id": "ctl00_Content_StartFV_txbNameFirst",
               "type": "input",
-              "value": "HROpsTest"
+              "value": "SBMM_FNAME"
             },
             {
               "id": "ctl00_Content_StartFV_txbNameLast",
               "type": "input",
-              "value": "HROpsTest"
+              "value": "SBMM_LNAME"
             }
           ]
         },

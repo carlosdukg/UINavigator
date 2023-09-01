@@ -4,6 +4,9 @@ using UINavigator.Models;
 using System.Reflection;
 using UINavigator.Models.UIModels;
 using UINavigator.Common.Contracts;
+using UINavigator.Models.UI;
+using Newtonsoft.Json.Linq;
+using System.Runtime.Intrinsics.X86;
 
 namespace UINavigator.Common
 {
@@ -15,26 +18,12 @@ namespace UINavigator.Common
         private const string LastFrame = "last";
 
         /// <summary>
-        /// Set HTML UI controls.
-        /// </summary>
-        /// <param name="driver"></param>
-        /// <param name="steps"></param>
-        /// <param name="utilities"></param>
-        public static void SetUIControls(this IWebDriver driver, List<UIWizardStep?> steps, IUtilitiesService utilities)
-        {
-            foreach (var step in steps)
-            {
-                SetUIControl(driver, step, utilities);
-            }
-        }
-
-        /// <summary>
         /// Set HTML UI control.
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="step"></param>
         /// <param name="utilities"></param>
-        public static void SetUIControl(this IWebDriver driver, UIWizardStep? step, IUtilitiesService? utilities)
+        /*public static void SetUIControl(this IWebDriver driver, UIWizardStep? step, IUtilitiesService? utilities)
         {
             if (step == null || utilities == null)
             {
@@ -80,7 +69,7 @@ namespace UINavigator.Common
             {
                 Thread.Sleep(TimeSpan.FromSeconds(step.DelayInSeconds.Value));
             }
-        }
+        }*/
 
         /// <summary>
         /// Set HTML UI control.
@@ -264,6 +253,14 @@ namespace UINavigator.Common
                             {
                                 input.Clear();
                             }
+                            else if (control.Value != null && control.Value.StartsWith("script:"))
+                            {
+                                var value = control.Value.Substring(control.Value.IndexOf(":") + 1);
+                                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                                js.ExecuteScript($"document.getElementById('{control.Id}').value = '${value}'");
+
+                                input.SendKeys(Keys.Return);
+                            }
                             else
                             {
                                 input.Clear();
@@ -279,7 +276,10 @@ namespace UINavigator.Common
                     {
                         var dropdown = control.Id == null ? driver.FindElement(By.Id(control.Name)) : driver.FindElement(By.Id(control.Id));
                         var dropdownElement = new SelectElement(dropdown);
-                        dropdownElement.SelectByValue(control.Value);
+                        if (control.Value != null)
+                        {
+                            dropdownElement.SelectByValue(control.Value);
+                        }
                         break;
                     }
                 case ControlType.Radio:
@@ -296,46 +296,75 @@ namespace UINavigator.Common
                     }
                 case ControlType.GridSearchAndSelect:
                     {
-                        var searchButton = driver.FindElement(By.Id("GridView1_filterButton"));
-                        searchButton.Click();
-
-                        // TODO: add search entry
-
-                        Thread.Sleep(TimeSpan.FromMilliseconds(1000));
-
-                        // active page grid
-                        var masterGrid = driver.FindElement(By.Id(control.Id));
-                        var masterBody = masterGrid.FindElement(By.TagName("tbody"));
-                        var tableRows = masterBody.FindElements(By.TagName("tr"));
-                        IWebElement? custLink = null;
-                        foreach (var row in tableRows.ToList())
+                        if (control.ObjectValue != null)
                         {
-                            var rowColumns = row.FindElements(By.TagName("td"));
-                            var controlValues = control.Value?.Split(":");
-                            IWebElement codeColumn;
-                            var searchText = string.Empty;
-                            if (controlValues == null || !controlValues.Any() || controlValues.Count() == 1)
+                            var gridValue = ((JObject)control.ObjectValue).ToObject<GridValue>();
+                            if (gridValue?.Search?.FindByContorlId !=null && !string.IsNullOrWhiteSpace(gridValue?.Search?.FindByControlValue))
                             {
-                                codeColumn = rowColumns[0];
-                                searchText = control.Value;
-                            }
-                            else
-                            {
-                                var index = int.Parse(controlValues[0]);
-                                codeColumn = rowColumns[index];
-                                searchText = controlValues[1];
+                                var findByControl = driver.FindElement(By.Id(gridValue?.Search?.FindByContorlId));                            
+                                var findByDropdown = new SelectElement(findByControl);
+                                findByDropdown.SelectByValue(gridValue?.Search.FindByControlValue);
                             }
 
-                            if (codeColumn != null && string.Equals(codeColumn.Text.Trim(), searchText, StringComparison.OrdinalIgnoreCase))
+                            if (gridValue?.Search?.OperatorControlId != null && !string.IsNullOrWhiteSpace(gridValue?.Search?.OperatorControlValue))
                             {
-                                custLink = rowColumns[0].FindElement(By.TagName("a"));
-                                break;
+                                var operatorControl = driver.FindElement(By.Id(gridValue?.Search?.OperatorControlId));
+                                var operatorDropdown = new SelectElement(operatorControl);                           
+                                operatorDropdown.SelectByValue(gridValue?.Search?.OperatorControlValue);
                             }
-                        }
 
-                        if (custLink != null)
-                        {
-                            custLink.Click();
+                            if (gridValue?.Search?.FromControlId != null && !string.IsNullOrWhiteSpace(gridValue?.Search?.FromControlValue))
+                            {
+                                var operatorControl = driver.FindElement(By.Id(gridValue?.Search?.OperatorControlId));
+                                var operatorDropdown = new SelectElement(operatorControl);
+                                operatorDropdown.SelectByValue(gridValue?.Search?.OperatorControlValue);
+                            }
+
+                            if (gridValue?.Search?.ToControlId != null && !string.IsNullOrWhiteSpace(gridValue?.Search?.ToControlValue))
+                            {
+                                var operatorControl = driver.FindElement(By.Id(gridValue?.Search?.OperatorControlId));
+                                var operatorDropdown = new SelectElement(operatorControl);
+                                operatorDropdown.SelectByValue(gridValue?.Search?.OperatorControlValue);
+                            }
+
+                            if (gridValue?.Search?.SearchInputControlId != null && !string.IsNullOrWhiteSpace(gridValue?.Search?.SearchInputControlValue))
+                            {
+                                var searchInput = driver.FindElement(By.Id(gridValue?.Search?.SearchInputControlId));                            
+                                searchInput.SendKeys(gridValue?.Search?.SearchInputControlValue);
+                            }
+
+                            var searchButton = driver.FindElement(By.Id(gridValue?.Search?.SearchButtonControlId));
+                            searchButton.Click();
+
+                            // delay to allow the grid to bind its data
+                            Thread.Sleep(TimeSpan.FromMilliseconds(1000));
+
+                            // active page grid
+                            var masterGrid = driver.FindElement(By.Id(control.Id));
+                            var masterBody = masterGrid.FindElement(By.TagName("tbody"));
+                            var tableRows = masterBody.FindElements(By.TagName("tr"));
+                            IWebElement? custLink = null;
+                            foreach (var row in tableRows.ToList())
+                            {
+                                var rowColumns = row.FindElements(By.TagName("td"));
+
+                                IWebElement codeColumn;
+                                var selectText = gridValue?.Select?.Value;
+                                var selectColIndex = gridValue?.Select?.ColIndex == null ? 0 : gridValue.Select.ColIndex;
+                                codeColumn = rowColumns[selectColIndex];
+
+                                if (codeColumn != null && string.Equals(codeColumn.Text.Trim(), selectText, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    // TODO: refactor: assumed that the first column contains the link to the next page, and the control is a html anchor
+                                    custLink = rowColumns[0].FindElement(By.TagName("a"));
+                                    break;
+                                }
+                            }
+
+                            if (custLink != null)
+                            {
+                                custLink.Click();
+                            }
                         }
                         break;
                     }

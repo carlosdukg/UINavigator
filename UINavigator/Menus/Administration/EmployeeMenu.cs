@@ -12,6 +12,7 @@ namespace UINavigator.Menus.Administration
         const string DirectDeposit = "481";
         const string Jobs = "455";
         const string JobSummary = "456";
+        const string Compensation = "463";
         const string JobHistory = "791";
         const string Personal = "338";
         const string EmployeeSummary = "17";
@@ -49,7 +50,8 @@ namespace UINavigator.Menus.Administration
                  { EmployeeMenuOption.JobSummary.ToString(), GetElement(JobSummary) },
                  { EmployeeMenuOption.JobHistory.ToString(), GetElement(JobHistory) },
                  { EmployeeMenuOption.Personal.ToString(), GetElement(Personal) },
-                 { EmployeeMenuOption.EmployeeSummary.ToString(), GetElement(EmployeeSummary) }
+                 { EmployeeMenuOption.EmployeeSummary.ToString(), GetElement(EmployeeSummary) },
+                 { EmployeeMenuOption.Compensation.ToString(), GetElement(Compensation) }
             };
         }
 
