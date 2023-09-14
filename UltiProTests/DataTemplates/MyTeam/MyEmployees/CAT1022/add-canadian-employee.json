@@ -56,16 +56,18 @@
             {
               "id": "NationalIdSearch",
               "type": "input",
-              "value": "632 495 982"
+              "value": "377 120 886"
             },
             {
               "id": "SearchButton",
-              "type": "buttonClick"
+              "type": "buttonClick",
+              "delayInSeconds": 1
             },
             {
               "id": "eeSearchInfoMsg",
               "type": "lookUp",
-              "value": "0:a"
+              "value": "0:a",
+              "delayInSeconds": 2
             },
             {
               "id": "hireTargetCompanies",
@@ -74,15 +76,16 @@
               "delayInSeconds": 2
             },
             {
-              "name": "txtNationalIdConfirmed",
+              "id": "txtNationalIdConfirmed",
               "type": "input",
-              "value": "632 495 982"
+              "value": "377 120 886",
+              "delayBeforeInSeconds" :  3
             }
           ]
         },
         {
           "name": "personal",
-          "delayInSeconds": 3,
+          "delayInSeconds": 5,
           "moveNext": true,
           "controls": [
             {
@@ -166,6 +169,19 @@
               "value": "CANBW"
             },
             {
+              "id": "ctl00_Content_frmPayroll_csPayPer",
+              "type": "dropdown",
+              "value": "CANBW",
+              "validateControls": {
+                "controlValues": [
+                  "Hour"
+                ],
+                "disabledControls": [
+                  "ctl00_Content_frmPayroll_csPayPer"
+                ]
+              }
+            },
+            {
               "id": "ctl00_Content_frmPayroll_txbPayRate",
               "type": "input",
               "value": "60",
@@ -233,27 +249,32 @@
           "name": "Summary",
           "delayInSeconds": 0,
           "moveNext": false,
-          "controls": []
-        }
-      ]
-    },
-    {
-      "type": "page",
-      "controls": [
-        {
-          "id": "ctl00_submitProcessMessage",
-          "type": "div",
-          "value": "You must select Submit to complete this request."
-        },
-        {
-          "id": "ctl00_btnSave",
-          "type": "buttonClick",
-          "value": null
-        },
-        {
-          "id": "",
-          "type": "UrlLocation",
-          "value": "https://rcda2000s2web.dlas1.ucloud.int/default.aspx"
+          "controls": [
+            {
+              "id": "AnnualRateAfter",
+              "type": "any",
+              "validateControls": {
+                "validationObject": {
+                  "methodName": "CalculateAnnualSalaryC",
+                  "methodControlParams": [
+                    {
+                      "Id": "ScheduledhoursAfter",
+                      "Type": "any"
+                    },
+                    {
+                      "Id": "HourlyRateAfter",
+                      "Type": "any"
+                    }
+                  ],
+                  "methodReturnType": "double",
+                  "controlToValidateId": {
+                    "Id": "AnnualRateAfter",
+                    "Type": "any"
+                  }
+                }
+              }
+            }
+          ]
         }
       ]
     }

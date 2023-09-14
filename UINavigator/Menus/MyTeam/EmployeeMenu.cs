@@ -1,19 +1,20 @@
 ﻿using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using UINavigator.Models.Enums.Employee;
 
-namespace UINavigator.Menus.Administration
+namespace UINavigator.Menus.MyTeam
 {
     public class EmployeeMenu
     {
         private readonly IWebDriver _driver;
-        const string CareerEducation = "912";
-        const string EmployeeVaccinationTest = "5001522";
-        const string Pay = "476";
-        const string DirectDeposit = "481";
-        const string Jobs = "455";
-        const string JobSummary = "456";
-        const string Compensation = "463";
-        const string JobHistory = "791";
+        const string Jobs = "127";
+        const string JobSummary = "946";
+        const string Compensation = "168";
+        const string JobHistory = "802";
         const string Personal = "338";
         const string EmployeeSummary = "17";
 
@@ -42,10 +43,6 @@ namespace UINavigator.Menus.Administration
         {
             return new Dictionary<string, IWebElement?>
             {
-                 { EmployeeMenuOption.CareerEducation.ToString(), GetElement(CareerEducation) },
-                 { EmployeeMenuOption.EmployeeVaccinationTest.ToString(), GetElement(EmployeeVaccinationTest) },
-                 { EmployeeMenuOption.Pay.ToString(), GetElement(Pay) },
-                 { EmployeeMenuOption.DirectDeposit.ToString(), GetElement(DirectDeposit) },
                  { EmployeeMenuOption.Jobs.ToString(), GetElement(Jobs) },
                  { EmployeeMenuOption.JobSummary.ToString(), GetElement(JobSummary) },
                  { EmployeeMenuOption.JobHistory.ToString(), GetElement(JobHistory) },

@@ -1,11 +1,57 @@
 {
+  "login": {
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_CABP",
+    "password": "password"
+  },
   "actions": [
     {
-      "type": "changeJobAndSalary",
-      "isWizard": true,
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.TopMenu",
+        "path": "MyTeam>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.MyTeam.MyTeamMenu",
+        "path": "MyEmployees>"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "last"
+        },
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "",
+          "delayInSeconds": 3
+        },
+        {
+          "id": "ctl00_btnAdd",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "last"
+        }
+      ]
+    },
+    {
+      "type": "Wizard",
       "wizardSteps": [
         {
           "name": "start",
+          "moveNext": true,
           "controls": [
             {
               "id": "ctl00_Content_StartFV_csCompany",
@@ -25,17 +71,19 @@
             {
               "id": "ctl00_Content_StartFV_txbNameFirst",
               "type": "input",
-              "value": "Kelly"
+              "value": "Kelly_4"
             },
             {
               "id": "ctl00_Content_StartFV_txbNameLast",
               "type": "input",
-              "value": "Slater"
+              "value": "Slater_4"
             }
           ]
         },
         {
           "name": "personal",
+          "delayInSeconds": 5,
+          "moveNext": true,
           "controls": [
             {
               "id": "ctl00_Content_NewHirePersonalFV_txbAddressLine1",
@@ -71,6 +119,8 @@
         },
         {
           "name": "dates",
+          "delayInSeconds": 2,
+          "moveNext": true,
           "controls": [
             {
               "name": "calDateOfLastHire_user",
@@ -81,6 +131,8 @@
         },
         {
           "name": "payroll",
+          "delayInSeconds": 2,
+          "moveNext": true,
           "controls": [
             {
               "id": "ctl00_Content_FormView1_csJob",
@@ -94,14 +146,23 @@
               "delayInSeconds": 3
             },
             {
-              "id": "ctl00_Content_FormView1_csRatesPer",
-              "type": "dropdown",
-              "value": "H"
-            },
-            {
               "id": "ctl00_Content_FormView1_csPayGroup",
               "type": "dropdown",
-              "value": "CORPBI"
+              "value": "CORPBI",
+              "validateControls": {
+                "disabledControls": [
+                  "ctl00_Content_FormView1_csRatesPer"
+                ]
+              }
+            },
+            {
+              "id": "ctl00_Content_FormView1_csRatesPer",
+              "type": "dropdown",
+              "validateControls": {
+                "controlValues": [
+                  "Hour"
+                ]
+              }
             },
             {
               "id": "ctl00_Content_FormView1_csEarningGroup",
@@ -132,6 +193,8 @@
         },
         {
           "name": "attendance",
+          "delayInSeconds": 2,
+          "moveNext": true,
           "controls": [
             {
               "id": "ctl00_Content_fvUTAEmployee_csEEType",
@@ -141,7 +204,21 @@
           ]
         },
         {
+          "name": "directDeposit",
+          "delayInSeconds": 2,
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "federalIncomeTax",
+          "delayInSeconds": 2,
+          "moveNext": true,
+          "controls": []
+        },
+        {
           "name": "stateTax",
+          "delayInSeconds": 8,
+          "moveNext": true,
           "controls": [
             {
               "id": "ctl00_Content_fv_csResidentCounty",
@@ -152,6 +229,8 @@
         },
         {
           "name": "localTax",
+          "delayInSeconds": 2,
+          "moveNext": true,
           "controls": [
             {
               "id": "ctl00_Content_uc_LocalTaxWorkInDetail_rbWorkInTaxResident",
@@ -173,6 +252,63 @@
               "value": "M"
             }
           ]
+        },
+        {
+          "name": "PTO",
+          "delayInSeconds": 2,
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "Summary",
+          "delayInSeconds": 0,
+          "moveNext": false,
+          "controls": [
+            {
+              "id": "AnnualRateAfter",
+              "type": "any",
+              "validateControls": {
+                "validationObject": {
+                  "methodName": "CalculateAnnualSalaryC",
+                  "methodControlParams": [
+                    {
+                      "Id": "ScheduledhoursAfter",
+                      "Type": "any"
+                    },
+                    {
+                      "Id": "HourlyRateAfter",
+                      "Type": "any"
+                    }
+                  ],
+                  "methodReturnType": "double",
+                  "controlToValidateId": {
+                    "Id": "AnnualRateAfter",
+                    "Type": "any"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ctl00_submitProcessMessage",
+          "type": "div",
+          "value": "You must select Submit to complete this request."
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "",
+          "type": "UrlLocation",
+          "value": "https://rcda2000s2web.dlas1.ucloud.int/default.aspx"
         }
       ]
     }

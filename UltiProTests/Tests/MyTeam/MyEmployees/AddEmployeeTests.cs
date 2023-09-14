@@ -79,5 +79,66 @@ namespace UltiProTests.Tests.ATopMenu.EmployeeAdmin.MyEmployees
             //*** execute UI actions ***//
             await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
         }
+
+        #region CAT1022
+
+        [TestMethod]
+        public async Task MyTeam_MyEmployees_Add_Canadian_Employee()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/MyTeam/MyEmployees/CAT1022/add-canadian-employee.json");
+            if (_driver == null)
+            {
+                Assert.Fail();
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest?.Login?.Username, uiTest?.Login?.Password, uiTest?.Login?.Url, uiTest?.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
+        public async Task MyTeam_MyEmployees_Add_Employee_1()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/MyTeam/MyEmployees/CAT1022/add-employee.json");
+            if (_driver == null)
+            {
+                Assert.Fail();
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest?.Login?.Username, uiTest?.Login?.Password, uiTest?.Login?.Url, uiTest?.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
+        public async Task MyTeam_MyEmployees_Transfer_Employee()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/Employee/Personal/CAT1022/transfer-employee.json");
+            if (_driver == null)
+            {
+                Assert.Fail();
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest?.Login?.Username, uiTest?.Login?.Password, uiTest?.Login?.Url, uiTest?.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
+        }
+
+        #endregion
     }
 }
