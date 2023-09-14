@@ -33,17 +33,11 @@
           "type": "gridSearchAndSelect",
           "objectValue": {
             "search": {
-              "findByContorlId": "GridView1_firstSelect_0",
-              "findByControlValue": "Last name",
-              "operatorControlId": "GridView1_Operator_0",
-              "operatorControlValue": "Contains",
-              "searchInputControlId": "GridView1_TextEntryFilterControlInputBox_0",
-              "searchInputControlValue": "Shawsburg",
               "searchButtonControlId": "GridView1_filterButton"
             },
             "select": {
-              "colindex": 0,
-              "value": "Shawsburg, Nan M."
+              "colindex": 1,
+              "value": "829309286"
             }
           }
         }
@@ -88,7 +82,7 @@
             {
               "id": "ccJobEffectiveDate_user",
               "type": "input",
-              "value": "09/03/2023"
+              "value": "09/08/2023"
             },
             {
               "id": "ctl00_Content_uc_eeChangeJob_frmChangeJob_csReason",
@@ -116,7 +110,7 @@
             {
               "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
               "type": "input",
-              "value": "script:60"
+              "value": "script:37"
             },
             {
               "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualCurNewRate",
@@ -181,7 +175,7 @@
               "id": "AnnualsalaryAfter",
               "type": "any",
               "validateControls": {
-                "validationObject": {
+                "HiddenControls": {
                   "methodName": "CalculateAnnualSalaryC",
                   "methodControlParams": [
                     {
@@ -200,6 +194,11 @@
                   }
                 }
               }
+            },
+            {
+              "id": "ctl00_btnSave",
+              "type": "buttonClick",
+              "value": null
             }
           ]
         }

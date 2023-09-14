@@ -14,6 +14,8 @@ namespace UINavigator.Models.UIModels
 
         public object? ObjectValue { get; set; }
 
+        public int? DelayBeforeInSeconds { get; set; }
+
         public int? DelayInSeconds { get; set; }
 
         public UIValidate? ValidateControls { get; set; }

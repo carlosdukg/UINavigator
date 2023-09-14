@@ -38,12 +38,12 @@
               "operatorControlId": "GridView1_Operator_0",
               "operatorControlValue": "Contains",
               "searchInputControlId": "GridView1_TextEntryFilterControlInputBox_0",
-              "searchInputControlValue": "corp",
+              "searchInputControlValue": "benes",
               "searchButtonControlId": "GridView1_filterButton"
             },
             "select": {
               "colindex": 0,
-              "value": "CORP_LNAME, CORP_FNAME"
+              "value": "Benes, AJ"
             }
           }
         }
@@ -75,31 +75,31 @@
             },
             "select": {
               "colindex": 0,
-              "value": "01/23/2021"
+              "value": "01/01/2006"
             }
           }
         },
         {
-          "id": "ctl00_Content_FormView1_lblAnnualNewRate",
+          "id": "ctl00_Content_FormView1_lblAnnSalary",
           "type": "span",
           "validateControls": {
             "validationObject": {
-              "methodName": "CalculateAnnualSalaryC",
+              "methodName": "ValidateCoreAnnualSalary",
               "methodControlParams": [
                 {
-                  "Id": "ctl00_Content_FormView1_lblScheduledWorkHours",
-                  "Type": "span"
+                  "Id": "ctl00_Content_FormView1_lblCurrentHourlyPay",
+                  "Type": "input"
                 },
                 {
-                  "Id": "ctl00_Content_FormView1_lblCurrentHourlyPay",
-                  "Type": "span"
+                  "Id": "ctl00_Content_FormView1_lblScheduledWorkHours",
+                  "Type": "input"
+                },
+                {
+                  "Id": "ctl00_Content_FormView1_lblAnnSalary",
+                  "Type": "input"
                 }
               ],
-              "methodReturnType": "double",
-              "controlToValidateId": {
-                "Id": "ctl00_Content_FormView1_lblAnnualNewRate",
-                "Type": "span"
-              }
+              "methodReturnType": "bool"
             }
           }
         }

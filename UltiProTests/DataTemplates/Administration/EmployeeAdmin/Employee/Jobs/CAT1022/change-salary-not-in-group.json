@@ -1,6 +1,6 @@
 {
   "login": {
-    "url": "https://rcda2000s8web.dlas1.ucloud.int/Login.aspx",
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
     "isSSOUser": false,
     "username": "fosterj_CABP",
     "password": "password"
@@ -38,12 +38,12 @@
               "operatorControlId": "GridView1_Operator_0",
               "operatorControlValue": "Contains",
               "searchInputControlId": "GridView1_TextEntryFilterControlInputBox_0",
-              "searchInputControlValue": "Bell",
+              "searchInputControlValue": "Boman",
               "searchButtonControlId": "GridView1_filterButton"
             },
             "select": {
               "colindex": 0,
-              "value": "Bell, Henry S."
+              "value": "Boman (Banasat), Gwen M."
             }
           }
         }
@@ -98,11 +98,9 @@
             {
               "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer",
               "type": "dropdown",
+              "value": "H",
               "validateControls": {
-                "controlValues": [
-                  "Hour"
-                ],
-                "disabledControls": [
+                "enabledControls": [
                   "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer"
                 ]
               }
@@ -110,14 +108,18 @@
             {
               "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
               "type": "input",
-              "value": "script:75"
+              "value": "script:41",
+              "delayInSeconds": 2
             },
             {
-              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNewNewRate",
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNew",
               "type": "span",
               "validateControls": {
+                "hiddenControls": [
+                  "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNewNewRate"
+                ],
                 "validationObject": {
-                  "methodName": "CalculateAnnualSalaryC",
+                  "methodName": "ValidateCoreAnnualSalary",
                   "methodControlParams": [
                     {
                       "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
@@ -126,24 +128,22 @@
                     {
                       "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_txbScheduledHours",
                       "Type": "input"
+                    },
+                    {
+                      "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNew",
+                      "Type": "span"
                     }
                   ],
-                  "methodReturnType": "double",
-                  "controlToValidateId": {
-                    "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNewNewRate",
-                    "Type": "span"
-                  }
+                  "methodReturnType": "bool"
                 }
               }
             }
-          ],
-          "delayInSeconds": 2
+          ]
         },
         {
           "name": "review",
           "moveNext": true,
-          "controls": [],
-          "delayInSeconds": 2
+          "controls": []
         },
         {
           "name": "summary",
@@ -154,7 +154,7 @@
               "type": "any",
               "validateControls": {
                 "validationObject": {
-                  "methodName": "CalculateAnnualSalaryC",
+                  "methodName": "ValidateCoreAnnualSalary",
                   "methodControlParams": [
                     {
                       "Id": "ScheduledhoursBefore",
@@ -163,13 +163,13 @@
                     {
                       "Id": "HourlypayrateBefore",
                       "Type": "any"
+                    },
+                    {
+                      "id": "AnnualsalaryBefore",
+                      "type": "any"
                     }
                   ],
-                  "methodReturnType": "double",
-                  "controlToValidateId": {
-                    "Id": "AnnualsalaryBefore",
-                    "Type": "any"
-                  }
+                  "methodReturnType": "bool"
                 }
               }
             },
@@ -178,7 +178,7 @@
               "type": "any",
               "validateControls": {
                 "validationObject": {
-                  "methodName": "CalculateAnnualSalaryC",
+                  "methodName": "ValidateCoreAnnualSalary",
                   "methodControlParams": [
                     {
                       "Id": "ScheduledhoursAfter",
@@ -187,13 +187,13 @@
                     {
                       "Id": "HourlypayrateAfter",
                       "Type": "any"
+                    },
+                    {
+                      "id": "AnnualsalaryAfter",
+                      "type": "any"
                     }
                   ],
-                  "methodReturnType": "double",
-                  "controlToValidateId": {
-                    "Id": "AnnualsalaryAfter",
-                    "Type": "any"
-                  }
+                  "methodReturnType": "bool"
                 }
               }
             }

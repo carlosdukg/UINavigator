@@ -1,12 +1,10 @@
 ﻿using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
-using UINavigator.Models;
 using System.Reflection;
 using UINavigator.Models.UIModels;
 using UINavigator.Common.Contracts;
 using UINavigator.Models.UI;
 using Newtonsoft.Json.Linq;
-using System.Runtime.Intrinsics.X86;
 
 namespace UINavigator.Common
 {
@@ -214,6 +212,11 @@ namespace UINavigator.Common
 
         private static void ProcessControlAction(UIControl control, IUtilitiesService utilities, IWebDriver driver)
         {
+            if(control.DelayBeforeInSeconds != null)
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(control.DelayBeforeInSeconds.Value));
+            }
+
             switch (control.Type)
             {
                 case ControlType.Input:
@@ -257,13 +260,16 @@ namespace UINavigator.Common
                             {
                                 var value = control.Value.Substring(control.Value.IndexOf(":") + 1);
                                 IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                                js.ExecuteScript($"document.getElementById('{control.Id}').value = '${value}'");
-
                                 input.SendKeys(Keys.Return);
+                                js.ExecuteScript($"document.getElementById('{control.Id}').value = '${value}'");
+                                js.ExecuteScript($"document.getElementById('{control.Id}').dispatchEvent(new Event('change'))");
+                                Thread.Sleep(TimeSpan.FromSeconds(1));
+                                driver.FindElement(By.XPath("//html")).Click();
                             }
-                            else
+                            else if(control.Value != null)
                             {
                                 input.Clear();
+                                Thread.Sleep(TimeSpan.FromSeconds(1));
                                 input.SendKeys(control.Value);
 
                                 // exit out the input to fire events if needed

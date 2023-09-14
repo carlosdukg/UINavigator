@@ -1,4 +1,6 @@
 ﻿
+using UINavigator.Models.Enums;
+
 namespace UINavigator.Models.UI
 {
     public class UIValidateValidationObject
@@ -7,7 +9,7 @@ namespace UINavigator.Models.UI
 
         public UIValidateValidationObjectControl[]? MethodControlParams { get; set; }
 
-        public string? MethodReturnType { get; set; }
+        public DataTypes? MethodReturnType { get; set; }
 
         public UIValidateValidationObjectControl? ControlToValidateId { get; set; }
 

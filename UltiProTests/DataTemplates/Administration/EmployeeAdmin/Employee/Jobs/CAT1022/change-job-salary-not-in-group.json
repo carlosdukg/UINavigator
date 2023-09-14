@@ -1,6 +1,6 @@
 {
   "login": {
-    "url": "https://rcda2000s8web.dlas1.ucloud.int/Login.aspx",
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
     "isSSOUser": false,
     "username": "fosterj_CABP",
     "password": "password"
@@ -33,17 +33,11 @@
           "type": "gridSearchAndSelect",
           "objectValue": {
             "search": {
-              "findByContorlId": "GridView1_firstSelect_0",
-              "findByControlValue": "Last name",
-              "operatorControlId": "GridView1_Operator_0",
-              "operatorControlValue": "Contains",
-              "searchInputControlId": "GridView1_TextEntryFilterControlInputBox_0",
-              "searchInputControlValue": "Bell",
               "searchButtonControlId": "GridView1_filterButton"
             },
             "select": {
-              "colindex": 0,
-              "value": "Bell, Henry S."
+              "colindex": 1,
+              "value": "299887768"
             }
           }
         }
@@ -69,7 +63,7 @@
         {
           "id": "rightMenu",
           "type": "RightMenuLink",
-          "value": "1:0"
+          "value": "0:1"
         },
         {
           "id": "ContentFrame",
@@ -82,68 +76,87 @@
       "type": "Wizard",
       "wizardSteps": [
         {
-          "name": "salary",
+          "name": "job",
           "moveNext": true,
           "controls": [
             {
-              "id": "calJobEff_user",
+              "id": "ccJobEffectiveDate_user",
               "type": "input",
-              "value": "09/08/2023"
+              "value": "09/07/2023"
             },
             {
-              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csReason",
+              "id": "ctl00_Content_uc_eeChangeJob_frmChangeJob_csReason",
               "type": "dropdown",
               "value": "501"
             },
+            {
+              "id": "ctl00_Content_uc_eeChangeJob_frmChangeJob_csPayGroup",
+              "type": "dropdown",
+              "value": "MEXPAY"
+            }
+          ]
+        },
+        {
+          "name": "salary",
+          "moveNext": true,
+          "controls": [
             {
               "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer",
               "type": "dropdown",
               "validateControls": {
                 "controlValues": [
-                  "Hour"
+                  ""
                 ],
-                "disabledControls": [
+                "enabledControls": [
                   "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer"
                 ]
               }
             },
             {
-              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
-              "type": "input",
-              "value": "script:75"
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer",
+              "type": "dropdown",
+              "value" :  "H"
             },
             {
-              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNewNewRate",
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
+              "type": "input",
+              "value": "script:50"
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csPaymentsPerYear",
+              "type": "dropdown",
+              "value": "12"
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualCur",
               "type": "span",
               "validateControls": {
-                "validationObject": {
-                  "methodName": "CalculateAnnualSalaryC",
-                  "methodControlParams": [
-                    {
-                      "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
-                      "Type": "input"
-                    },
-                    {
-                      "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_txbScheduledHours",
-                      "Type": "input"
-                    }
-                  ],
-                  "methodReturnType": "double",
-                  "controlToValidateId": {
-                    "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNewNewRate",
-                    "Type": "span"
-                  }
+              }
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualCur",
+              "type": "span",
+              "validateControls": {
+                "validateControls": {
+                  "controlValue": "60,000.00"
+                }
+              }
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNew",
+              "type": "span",
+              "validateControls": {
+                "validateControls": {
+                  "controlValue": "93,336.00"
                 }
               }
             }
-          ],
-          "delayInSeconds": 2
+          ]
         },
         {
           "name": "review",
           "moveNext": true,
-          "controls": [],
-          "delayInSeconds": 2
+          "controls": []
         },
         {
           "name": "summary",
@@ -153,23 +166,8 @@
               "id": "AnnualsalaryBefore",
               "type": "any",
               "validateControls": {
-                "validationObject": {
-                  "methodName": "CalculateAnnualSalaryC",
-                  "methodControlParams": [
-                    {
-                      "Id": "ScheduledhoursBefore",
-                      "Type": "any"
-                    },
-                    {
-                      "Id": "HourlypayrateBefore",
-                      "Type": "any"
-                    }
-                  ],
-                  "methodReturnType": "double",
-                  "controlToValidateId": {
-                    "Id": "AnnualsalaryBefore",
-                    "Type": "any"
-                  }
+                "validateControls": {
+                  "controlValue": "60,000.00 MXN"
                 }
               }
             },
@@ -177,25 +175,15 @@
               "id": "AnnualsalaryAfter",
               "type": "any",
               "validateControls": {
-                "validationObject": {
-                  "methodName": "CalculateAnnualSalaryC",
-                  "methodControlParams": [
-                    {
-                      "Id": "ScheduledhoursAfter",
-                      "Type": "any"
-                    },
-                    {
-                      "Id": "HourlypayrateAfter",
-                      "Type": "any"
-                    }
-                  ],
-                  "methodReturnType": "double",
-                  "controlToValidateId": {
-                    "Id": "AnnualsalaryAfter",
-                    "Type": "any"
-                  }
+                "validateControls": {
+                  "controlValue": "93,336.00 MXN"
                 }
               }
+            },
+            {
+              "id": "ctl00_btnSave",
+              "type": "buttonClick",
+              "value": null
             }
           ]
         }

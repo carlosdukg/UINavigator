@@ -189,11 +189,59 @@ namespace UltiProTests.Tests.AdministrationTopMenu.EmployeeAdmin.MyEmployees
         }
 
         [TestMethod]
+        public async Task Job_Summary_Salary_Not_In_Pay_Groupp()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/Employee/Jobs/CAT1022/job-summary-not-in-paygroup.json");
+
+            if (_driver == null)
+            {
+                Assert.Fail("Null selenium driver");
+            }
+            if (uiTest == null)
+            {
+                Assert.Fail("Null test template");
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
         public async Task Change_Job_And_Salary_Pay_Group()
         {
             //*** arrange ***//
             var uiTest = await TestHelper
                 .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/Employee/Jobs/CAT1022/change-job-salary.json");
+
+            if (_driver == null)
+            {
+                Assert.Fail("Null selenium driver");
+            }
+            if (uiTest == null)
+            {
+                Assert.Fail("Null test template");
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
+        public async Task Change_Job_And_Salary_Pay_Not_In_Group()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/Employee/Jobs/CAT1022/change-job-salary-not-in-group.json");
 
             if (_driver == null)
             {
@@ -237,11 +285,131 @@ namespace UltiProTests.Tests.AdministrationTopMenu.EmployeeAdmin.MyEmployees
         }
 
         [TestMethod]
-        public async Task Job_Detail_Pay_Group()
+        public async Task Change_Salary_Not_In_Pay_Group()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/Employee/Jobs/CAT1022/change-salary-not-in-group.json");
+
+            if (_driver == null)
+            {
+                Assert.Fail("Null selenium driver");
+            }
+            if (uiTest == null)
+            {
+                Assert.Fail("Null test template");
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
+        public async Task Job_History_Detail_Pay_Group()
         {
             //*** arrange ***//
             var uiTest = await TestHelper
                 .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/Employee/Jobs/CAT1022/job-history-detail-in-paygroup.json");
+
+            if (_driver == null)
+            {
+                Assert.Fail("Null selenium driver");
+            }
+            if (uiTest == null)
+            {
+                Assert.Fail("Null test template");
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
+        public async Task Job_Detail_Pay_Not_In_Pay_Group()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/Employee/Jobs/CAT1022/job-history-detail-not-in-paygroup.json");
+
+            if (_driver == null)
+            {
+                Assert.Fail("Null selenium driver");
+            }
+            if (uiTest == null)
+            {
+                Assert.Fail("Null test template");
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
+        public async Task Admin_Add_Job_History_Pay_Group()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/Employee/Jobs/CAT1022/admin-add-job-history-in-paygroup.json");
+
+            if (_driver == null)
+            {
+                Assert.Fail("Null selenium driver");
+            }
+            if (uiTest == null)
+            {
+                Assert.Fail("Null test template");
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
+        public async Task MyTeam_Add_Job_History_Pay_Group()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/Employee/Jobs/CAT1022/team-add-job-history-in-paygroup.json");
+
+            if (_driver == null)
+            {
+                Assert.Fail("Null selenium driver");
+            }
+            if (uiTest == null)
+            {
+                Assert.Fail("Null test template");
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
+        public async Task MyTeam_Edit_Job_History_Pay_Group()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/Employee/Jobs/CAT1022/team-edit-job-history-in-paygroup.json");
 
             if (_driver == null)
             {

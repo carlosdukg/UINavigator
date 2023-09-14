@@ -63,7 +63,24 @@
           "id": "ctl00_Content_FormView1_lblAnnual",
           "type": "span",
           "validateControls": {
-            "controlValue": "$78,500.00"
+            "validationObject": {
+              "methodName": "CalculateAnnualSalaryC",
+              "methodControlParams": [
+                {
+                  "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
+                  "Type": "input"
+                },
+                {
+                  "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_txbScheduledHours",
+                  "Type": "input"
+                }
+              ],
+              "methodReturnType": "double",
+              "controlToValidateId": {
+                "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNewNewRate",
+                "Type": "span"
+              }
+            }
           }
         }
       ]

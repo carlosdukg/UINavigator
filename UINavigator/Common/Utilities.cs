@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
-using UINavigator.Common.Contracts;
+﻿using UINavigator.Common.Contracts;
 using UINavigator.Models;
 using UINavigator.Models.UIModels;
 using UINavigator.Services;
@@ -58,7 +55,7 @@ namespace UINavigator.Common
             var empnum = _cache.Get<string>("empnum");
             if (empnum == null)
             {
-                empnum = "1010";
+                empnum = "1030";
                 _cache.Set("empnum", empnum);
             }
             else
@@ -72,13 +69,32 @@ namespace UINavigator.Common
             return empnum;
         }
 
-        public double CalculateAnnualSalaryC(string? hour, string? rate)
+        public static double CalculateAnnualSalaryC(string? hour, string? rate)
         {
             if (hour != null && rate != null)
             {
                 return double.Parse(hour) * double.Parse(rate) * 22;
             }
             return 0;
+        }
+
+        public static bool ValidateCoreAnnualSalary(string? hour, string? rate, string? salary)
+        {
+            if (hour != null && rate != null)
+            {
+                var customSalaryC = double.Parse(hour) * double.Parse(rate) * 22;
+                var customSalaryB = double.Parse(hour) * double.Parse(rate) * 20;
+
+                if(salary != null)
+                {
+                    if (salary.Contains("$"))
+                    {
+                        salary = salary.Replace("$", "");
+                    }
+                    return double.Parse(salary) != customSalaryC && double.Parse(salary) != customSalaryB;
+                }
+            }
+            return false;
         }
 
         /// <inheritdoc/>

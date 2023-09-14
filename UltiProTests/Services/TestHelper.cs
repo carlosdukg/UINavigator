@@ -4,11 +4,8 @@ using UINavigator.Common;
 using UINavigator.Models.UIModels;
 using UINavigator.Common.Contracts;
 using OpenQA.Selenium.Support.UI;
-using System.Collections.Generic;
-using System;
 using System.Reflection;
-using System.Security;
-using UINavigator.Models.UI;
+using UINavigator.Models.Enums;
 
 namespace UltiProTests.Services
 {
@@ -150,6 +147,8 @@ namespace UltiProTests.Services
 
                 ValidateDisabledControls(control.ValidateControls?.DisabledControls, webDriver);
 
+                ValidateEnabledControls(control.ValidateControls?.EnabledControls, webDriver);
+
                 ValidatePageMessages(control, webDriver);
 
                 ValidateValidationObject(control, webDriver, utils);
@@ -261,6 +260,21 @@ namespace UltiProTests.Services
             }
         }
 
+        private static void ValidateEnabledControls(IEnumerable<string>? enabledControls, IWebDriver webDriver)
+        {
+            if (enabledControls != null && enabledControls.Any())
+            {
+                foreach (var enabledControl in enabledControls)
+                {
+                    var coreDisabledAttr = webDriver.FindElement(By.Id(enabledControl)).GetAttribute("core-disabled");
+                    Assert.IsTrue(coreDisabledAttr == null);
+
+                    var disabledAttr = webDriver.FindElement(By.Id(enabledControl)).GetAttribute("disabled");
+                    Assert.IsTrue(disabledAttr == null);
+                }
+            }
+        }
+
         private static void ValidatePageMessages(UIControl control, IWebDriver webDriver)
         {
             if (control.ErrorMessages != null && control.ErrorMessages.Any())
@@ -317,11 +331,14 @@ namespace UltiProTests.Services
                 {
                     MethodInfo? ctrlMethod = utilsType.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
                     object? expectedControlValue;
-                    if (control?.ValidateControls.ValidationObject.MethodReturnType == "double")
+                    if (control?.ValidateControls.ValidationObject.MethodReturnType == DataTypes.Double)
                     {
                         if (methodParams != null)
                         {
-                            var parsedParams = methodParams.Select(x => x.Type == ControlType.Any || x.Type == ControlType.Span ? GetHtmlValue(x.Id, webDriver) : GetInputValue(x.Id, webDriver)).ToArray();
+                            var parsedParams = methodParams.Select(x => x.Type == ControlType.Any 
+                                || x.Type == ControlType.Span ? 
+                                GetHtmlValue(x.Id, webDriver) : 
+                                GetInputValue(x.Id, webDriver)).ToArray();
                             expectedControlValue = (double?)ctrlMethod?.Invoke(utils, parsedParams);
                         }
                         else
@@ -330,11 +347,14 @@ namespace UltiProTests.Services
                         }
 
                         var controlToValidate = control?.ValidateControls.ValidationObject.ControlToValidateId;
-                        var controlToValidateValue = GetHtmlValue(controlToValidate.Id, webDriver);
+                        var controlToValidateValue = controlToValidate?.Type == ControlType.Any || controlToValidate?.Type == ControlType.Span ?
+                            GetHtmlValue(controlToValidate?.Id, webDriver) :
+                            GetInputValue(controlToValidate?.Id, webDriver);
 
-                        Assert.IsTrue((double)expectedControlValue == double.Parse(controlToValidateValue), $"expected value:{(double)expectedControlValue}, control value:{double.Parse(controlToValidateValue)}");
+                        Assert.IsTrue((double?)expectedControlValue == 
+                            double.Parse(controlToValidateValue), $"expected value:{(double)expectedControlValue}, control value:{double.Parse(controlToValidateValue)}");
                     }
-                    else if (control?.ValidateControls.ValidationObject.MethodReturnType == "int")
+                    else if (control?.ValidateControls.ValidationObject.MethodReturnType == DataTypes.Int)
                     {
                         if (methodParams != null)
                         {
@@ -346,25 +366,42 @@ namespace UltiProTests.Services
                             expectedControlValue = (int?)ctrlMethod?.Invoke(utilsType, null);
                         }
                         var controlToValidate = control?.ValidateControls.ValidationObject.ControlToValidateId;
-                        var controlToValidateValue = GetHtmlValue(controlToValidate.Id, webDriver);
+                        var controlToValidateValue = GetHtmlValue(controlToValidate?.Id, webDriver);
 
-                        Assert.IsTrue((int)expectedControlValue == int.Parse(controlToValidateValue));
+                        Assert.IsTrue((int?)expectedControlValue == int.Parse(controlToValidateValue));
                     }
-                    else if (control?.ValidateControls.ValidationObject.MethodReturnType == "string")
+                    else if (control?.ValidateControls.ValidationObject.MethodReturnType == DataTypes.String)
                     {
                         if (methodParams != null)
                         {
                             var parsedParams = methodParams.Select(x => GetHtmlValue(x.Id, webDriver)).ToArray();
-                            expectedControlValue = (string?)ctrlMethod?.Invoke(utils, new[] { parsedParams });
+                            expectedControlValue = (string?)ctrlMethod?.Invoke(utils, parsedParams);
                         }
                         else
                         {
                             expectedControlValue = (string?)ctrlMethod?.Invoke(utils, null);
                         }
                         var controlToValidate = control?.ValidateControls.ValidationObject.ControlToValidateId;
-                        var controlToValidateValue = GetHtmlValue(controlToValidate.Id, webDriver);
+                        var controlToValidateValue = GetHtmlValue(controlToValidate?.Id, webDriver);
 
-                        Assert.IsTrue(expectedControlValue == controlToValidateValue);
+                        Assert.IsTrue(string.Equals(expectedControlValue, controlToValidateValue));
+                    }
+                    else if (control?.ValidateControls.ValidationObject.MethodReturnType == DataTypes.Bool)
+                    {
+                        if (methodParams != null)
+                        {
+                            var parsedParams = methodParams.Select(x => x.Type == ControlType.Any 
+                                || x.Type == ControlType.Span ? 
+                                    GetHtmlValue(x.Id, webDriver) : 
+                                    GetInputValue(x.Id, webDriver)).ToArray();
+                            expectedControlValue = (bool?)ctrlMethod?.Invoke(utils, parsedParams);
+                        }
+                        else
+                        {
+                            expectedControlValue = (bool?)ctrlMethod?.Invoke(utils, null);
+                        }
+
+                        Assert.IsTrue((bool?)expectedControlValue);
                     }
                 }
             }
@@ -436,17 +473,27 @@ namespace UltiProTests.Services
             Assert.IsTrue(driverUrl == control.Value);
         }
 
-        private static string GetInputValue(string id, IWebDriver webDriver)
+        private static string GetInputValue(string? id, IWebDriver webDriver)
         {
+            if (id == null)
+            {
+                return string.Empty;
+            }
+
             var htmlCtrl = webDriver.FindElement(By.Id(id));
-            var htmlCtrlValue = htmlCtrl.GetAttribute("value").Contains("$") ? htmlCtrl.GetAttribute("value")[1..] : htmlCtrl.GetAttribute("value");
+            var htmlCtrlValue = htmlCtrl.GetAttribute("value").Contains('$') ? htmlCtrl.GetAttribute("value")[1..] : htmlCtrl.GetAttribute("value");
             return htmlCtrlValue;
         }
 
-        private static string GetHtmlValue(string id, IWebDriver webDriver)
+        private static string GetHtmlValue(string? id, IWebDriver webDriver)
         {
+            if(id == null)
+            {
+                return string.Empty;
+            }
+            
             var htmlCtrl = webDriver.FindElement(By.Id(id));
-            var htmlCtrlText = htmlCtrl.Text.Contains("$") ? htmlCtrl.Text[1..] : htmlCtrl.Text;
+            var htmlCtrlText = htmlCtrl.Text.Contains('$') ? htmlCtrl.Text[1..] : htmlCtrl.Text;
             return htmlCtrlText;
         }
     }

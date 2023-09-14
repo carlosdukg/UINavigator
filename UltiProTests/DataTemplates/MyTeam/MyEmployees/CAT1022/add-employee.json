@@ -1,22 +1,22 @@
 {
   "login": {
-    "url": "https://rcda2000s7web.dlas1.ucloud.int/Login.aspx",
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
     "isSSOUser": false,
-    "username": "fosterj_RGRTA",
+    "username": "fosterj_CABP",
     "password": "password"
   },
   "actions": [
     {
       "type": "navigate",
       "navigation": {
-        "handler": "UINavigator.Models.Menus.TopMenu",
+        "handler": "UINavigator.Menus.TopMenu",
         "path": "MyTeam>"
       }
     },
     {
       "type": "navigate",
       "navigation": {
-        "handler": "UINavigator.Models.Menus.MyTeam.MyTeamMenu",
+        "handler": "UINavigator.Menus.MyTeam.MyTeamMenu",
         "path": "MyEmployees>"
       }
     },
@@ -71,18 +71,18 @@
             {
               "id": "ctl00_Content_StartFV_txbNameFirst",
               "type": "input",
-              "value": "Kelly"
+              "value": "Kelly_4"
             },
             {
               "id": "ctl00_Content_StartFV_txbNameLast",
               "type": "input",
-              "value": "Slater"
+              "value": "Slater_4"
             }
           ]
         },
         {
           "name": "personal",
-          "delayInSeconds": 3,
+          "delayInSeconds": 5,
           "moveNext": true,
           "controls": [
             {
@@ -146,14 +146,23 @@
               "delayInSeconds": 3
             },
             {
-              "id": "ctl00_Content_FormView1_csRatesPer",
-              "type": "dropdown",
-              "value": "H"
-            },
-            {
               "id": "ctl00_Content_FormView1_csPayGroup",
               "type": "dropdown",
-              "value": "CORPBI"
+              "value": "CORPBI",
+              "validateControls": {
+                "disabledControls": [
+                  "ctl00_Content_FormView1_csRatesPer"
+                ]
+              }
+            },
+            {
+              "id": "ctl00_Content_FormView1_csRatesPer",
+              "type": "dropdown",
+              "validateControls": {
+                "controlValues": [
+                  "Hour"
+                ]
+              }
             },
             {
               "id": "ctl00_Content_FormView1_csEarningGroup",
@@ -254,7 +263,32 @@
           "name": "Summary",
           "delayInSeconds": 0,
           "moveNext": false,
-          "controls": []
+          "controls": [
+            {
+              "id": "AnnualRateAfter",
+              "type": "any",
+              "validateControls": {
+                "validationObject": {
+                  "methodName": "CalculateAnnualSalaryC",
+                  "methodControlParams": [
+                    {
+                      "Id": "ScheduledhoursAfter",
+                      "Type": "any"
+                    },
+                    {
+                      "Id": "HourlyRateAfter",
+                      "Type": "any"
+                    }
+                  ],
+                  "methodReturnType": "double",
+                  "controlToValidateId": {
+                    "Id": "AnnualRateAfter",
+                    "Type": "any"
+                  }
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -274,7 +308,7 @@
         {
           "id": "",
           "type": "UrlLocation",
-          "value": "https://rcda2000s7web.dlas1.ucloud.int/default.aspx"
+          "value": "https://rcda2000s2web.dlas1.ucloud.int/default.aspx"
         }
       ]
     }
