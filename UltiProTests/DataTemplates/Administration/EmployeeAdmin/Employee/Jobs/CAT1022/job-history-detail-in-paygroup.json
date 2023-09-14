@@ -1,0 +1,109 @@
+{
+  "login": {
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_CABP",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.TopMenu",
+        "path": "MyTeam>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.MyTeam.MyTeamMenu",
+        "path": "MyEmployees"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "objectValue": {
+            "search": {
+              "findByContorlId": "GridView1_firstSelect_0",
+              "findByControlValue": "Last name",
+              "operatorControlId": "GridView1_Operator_0",
+              "operatorControlValue": "Contains",
+              "searchInputControlId": "GridView1_TextEntryFilterControlInputBox_0",
+              "searchInputControlValue": "corp",
+              "searchButtonControlId": "GridView1_filterButton"
+            },
+            "select": {
+              "colindex": 0,
+              "value": "CORP_LNAME, CORP_FNAME"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "UINavigator.Menus.MyTeam.EmployeeMenu",
+        "path": "Jobs>JobHistory"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "",
+          "delayInSeconds": 2
+        },
+        {
+          "id": "ctl00_Content_grvEEJobHistory",
+          "type": "gridSearchAndSelect",
+          "objectValue": {
+            "search": {
+              "SearchButtonControlId": "grvEEJobHistory_filterButton"
+            },
+            "select": {
+              "colindex": 0,
+              "value": "01/23/2021"
+            }
+          }
+        },
+        {
+          "id": "ctl00_Content_FormView1_lblAnnualNewRate",
+          "type": "span",
+          "validateControls": {
+            "validationObject": {
+              "methodName": "CalculateAnnualSalaryC",
+              "methodControlParams": [
+                {
+                  "Id": "ctl00_Content_FormView1_lblScheduledWorkHours",
+                  "Type": "span"
+                },
+                {
+                  "Id": "ctl00_Content_FormView1_lblCurrentHourlyPay",
+                  "Type": "span"
+                }
+              ],
+              "methodReturnType": "double",
+              "controlToValidateId": {
+                "Id": "ctl00_Content_FormView1_lblAnnualNewRate",
+                "Type": "span"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

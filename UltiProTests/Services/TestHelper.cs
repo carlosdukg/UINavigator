@@ -4,6 +4,8 @@ using UINavigator.Common;
 using UINavigator.Models.UIModels;
 using UINavigator.Common.Contracts;
 using OpenQA.Selenium.Support.UI;
+using System.Reflection;
+using UINavigator.Models.Enums;
 
 namespace UltiProTests.Services
 {
@@ -14,15 +16,8 @@ namespace UltiProTests.Services
             using StreamReader stream = new(location);
             var data = await stream.ReadToEndAsync();
 
-            try
-            {
-                var receipe = JsonConvert.DeserializeObject<UITest>(data);
-                return receipe;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            var receipe = JsonConvert.DeserializeObject<UITest>(data);
+            return receipe;
         }
 
         public static async Task ProcessUIActionsAsync(
@@ -64,28 +59,19 @@ namespace UltiProTests.Services
                     case UIActionType.Page:
                         await Task.Run(() =>
                         {
-                            ProcessTestControlActions(action, webDriver, utils);
+                            ProcessControlActions(action.Controls, webDriver, utils);
                         });
                         break;
                     case UIActionType.PopUp: // check action for pages, and clearly define whats a page or a pop-up
                         await Task.Run(() =>
                         {
-                            ProcessTestControlActions(action, webDriver, utils);
+                            ProcessControlActions(action.Controls, webDriver, utils);
                         });
                         break;
                     case UIActionType.Wizard:
                         await Task.Run(() =>
                         {
-                            // execute wizard steps
-                            var wizardSteps = utils?.GetWizardSteps(action);
-
-                            if (wizardSteps != null)
-                            {
-                                foreach (var step in wizardSteps)
-                                {
-                                    webDriver?.SetUIControl(step, utils);
-                                }
-                            }
+                            ProcessWizardControlActions(action, webDriver, utils);
                         });
                         break;
                 }
@@ -94,7 +80,7 @@ namespace UltiProTests.Services
 
         public static void ProcessUIActions(List<UIAction>? actions, IWebDriver? webDriver, IUtilitiesService? utils, Navigation? pageNav)
         {
-            if(actions == null || webDriver == null)
+            if (actions == null || webDriver == null)
             {
                 return;
             }
@@ -105,7 +91,7 @@ namespace UltiProTests.Services
                 switch (action.Type)
                 {
                     case UIActionType.Navigate:
-                        if(action.Navigation == null)
+                        if (action.Navigation == null)
                         {
                             break;
                         }
@@ -121,34 +107,31 @@ namespace UltiProTests.Services
                         }
                         break;
                     case UIActionType.Page:
-                        ProcessTestControlActions(action, webDriver, utils);
+                        ProcessControlActions(action.Controls, webDriver, utils);
                         break;
                     case UIActionType.PopUp: // check action for pages, and clearly define whats a page or a pop-up
-                        ProcessTestControlActions(action, webDriver, utils);
+                        ProcessControlActions(action.Controls, webDriver, utils);
                         break;
                     case UIActionType.Wizard:
-                        // execute wizard steps
-                        var wizardSteps = utils?.GetWizardSteps(action);
-                        if (wizardSteps != null)
-                        {
-                            foreach (var step in wizardSteps)
-                            {
-                                webDriver.SetUIControl(step, utils);
-                            }
-                        }
+                        ProcessWizardControlActions(action, webDriver, utils);
                         break;
                 }
             }
         }
 
-        private static void ProcessTestControlActions(UIAction? action, IWebDriver? webDriver, IUtilitiesService? utils)
+        private static void ProcessControlActions(List<UIControl>? controls, IWebDriver? webDriver, IUtilitiesService? utils)
         {
-            if (action?.Controls == null || webDriver == null || utils == null)
+            if (webDriver == null || utils == null)
             {
                 return;
             }
 
-            foreach (var control in action.Controls)
+            if (controls == null || !controls.Any())
+            {
+                return;
+            }
+
+            foreach (var control in controls)
             {
                 webDriver.SetUIControl(utils, control);
 
@@ -164,7 +147,48 @@ namespace UltiProTests.Services
 
                 ValidateDisabledControls(control.ValidateControls?.DisabledControls, webDriver);
 
+                ValidateEnabledControls(control.ValidateControls?.EnabledControls, webDriver);
+
                 ValidatePageMessages(control, webDriver);
+
+                ValidateValidationObject(control, webDriver, utils);
+            }
+        }
+
+        private static void ProcessWizardControlActions(UIAction? action, IWebDriver? webDriver, IUtilitiesService? utils)
+        {
+            if (action == null || webDriver == null || utils == null)
+            {
+                return;
+            }
+
+            var wizardSteps = utils?.GetWizardSteps(action);
+            if (wizardSteps == null || !wizardSteps.Any())
+            {
+                return;
+            }
+
+            foreach (var step in wizardSteps)
+            {
+                if (step == null)
+                {
+                    continue;
+                }
+
+                ProcessControlActions(step.Controls, webDriver, utils);
+
+                if (step.MoveNext.HasValue && step.MoveNext.Value)
+                {
+                    webDriver.MoveNext();
+                }
+                if (step.MovePrev.HasValue && step.MovePrev.Value)
+                {
+                    webDriver.MovePrev();
+                }
+                if (step.DelayInSeconds != null)
+                {
+                    Thread.Sleep(TimeSpan.FromSeconds(step.DelayInSeconds.Value));
+                }
             }
         }
 
@@ -236,6 +260,21 @@ namespace UltiProTests.Services
             }
         }
 
+        private static void ValidateEnabledControls(IEnumerable<string>? enabledControls, IWebDriver webDriver)
+        {
+            if (enabledControls != null && enabledControls.Any())
+            {
+                foreach (var enabledControl in enabledControls)
+                {
+                    var coreDisabledAttr = webDriver.FindElement(By.Id(enabledControl)).GetAttribute("core-disabled");
+                    Assert.IsTrue(coreDisabledAttr == null);
+
+                    var disabledAttr = webDriver.FindElement(By.Id(enabledControl)).GetAttribute("disabled");
+                    Assert.IsTrue(disabledAttr == null);
+                }
+            }
+        }
+
         private static void ValidatePageMessages(UIControl control, IWebDriver webDriver)
         {
             if (control.ErrorMessages != null && control.ErrorMessages.Any())
@@ -280,22 +319,113 @@ namespace UltiProTests.Services
             }
         }
 
+        private static void ValidateValidationObject(UIControl control, IWebDriver webDriver, IUtilitiesService utils)
+        {
+            if (control?.ValidateControls?.ValidationObject != null)
+            {
+                var methodName = control?.ValidateControls?.ValidationObject?.MethodName?.Trim();
+                var methodParams = control?.ValidateControls?.ValidationObject?.MethodControlParams;
+
+                Type utilsType = utils.GetType();
+                if (!string.IsNullOrWhiteSpace(methodName))
+                {
+                    MethodInfo? ctrlMethod = utilsType.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
+                    object? expectedControlValue;
+                    if (control?.ValidateControls.ValidationObject.MethodReturnType == DataTypes.Double)
+                    {
+                        if (methodParams != null)
+                        {
+                            var parsedParams = methodParams.Select(x => x.Type == ControlType.Any 
+                                || x.Type == ControlType.Span ? 
+                                GetHtmlValue(x.Id, webDriver) : 
+                                GetInputValue(x.Id, webDriver)).ToArray();
+                            expectedControlValue = (double?)ctrlMethod?.Invoke(utils, parsedParams);
+                        }
+                        else
+                        {
+                            expectedControlValue = (double?)ctrlMethod?.Invoke(utils, null);
+                        }
+
+                        var controlToValidate = control?.ValidateControls.ValidationObject.ControlToValidateId;
+                        var controlToValidateValue = controlToValidate?.Type == ControlType.Any || controlToValidate?.Type == ControlType.Span ?
+                            GetHtmlValue(controlToValidate?.Id, webDriver) :
+                            GetInputValue(controlToValidate?.Id, webDriver);
+
+                        Assert.IsTrue((double?)expectedControlValue == 
+                            double.Parse(controlToValidateValue), $"expected value:{(double)expectedControlValue}, control value:{double.Parse(controlToValidateValue)}");
+                    }
+                    else if (control?.ValidateControls.ValidationObject.MethodReturnType == DataTypes.Int)
+                    {
+                        if (methodParams != null)
+                        {
+                            var parsedParams = methodParams.Select(x => GetHtmlValue(x.Id, webDriver)).ToArray();
+                            expectedControlValue = (int?)ctrlMethod?.Invoke(utilsType, new[] { parsedParams });
+                        }
+                        else
+                        {
+                            expectedControlValue = (int?)ctrlMethod?.Invoke(utilsType, null);
+                        }
+                        var controlToValidate = control?.ValidateControls.ValidationObject.ControlToValidateId;
+                        var controlToValidateValue = GetHtmlValue(controlToValidate?.Id, webDriver);
+
+                        Assert.IsTrue((int?)expectedControlValue == int.Parse(controlToValidateValue));
+                    }
+                    else if (control?.ValidateControls.ValidationObject.MethodReturnType == DataTypes.String)
+                    {
+                        if (methodParams != null)
+                        {
+                            var parsedParams = methodParams.Select(x => GetHtmlValue(x.Id, webDriver)).ToArray();
+                            expectedControlValue = (string?)ctrlMethod?.Invoke(utils, parsedParams);
+                        }
+                        else
+                        {
+                            expectedControlValue = (string?)ctrlMethod?.Invoke(utils, null);
+                        }
+                        var controlToValidate = control?.ValidateControls.ValidationObject.ControlToValidateId;
+                        var controlToValidateValue = GetHtmlValue(controlToValidate?.Id, webDriver);
+
+                        Assert.IsTrue(string.Equals(expectedControlValue, controlToValidateValue));
+                    }
+                    else if (control?.ValidateControls.ValidationObject.MethodReturnType == DataTypes.Bool)
+                    {
+                        if (methodParams != null)
+                        {
+                            var parsedParams = methodParams.Select(x => x.Type == ControlType.Any 
+                                || x.Type == ControlType.Span ? 
+                                    GetHtmlValue(x.Id, webDriver) : 
+                                    GetInputValue(x.Id, webDriver)).ToArray();
+                            expectedControlValue = (bool?)ctrlMethod?.Invoke(utils, parsedParams);
+                        }
+                        else
+                        {
+                            expectedControlValue = (bool?)ctrlMethod?.Invoke(utils, null);
+                        }
+
+                        Assert.IsTrue((bool?)expectedControlValue);
+                    }
+                }
+            }
+        }
+
         private static void ValidateControlValue(UIControl control, IWebDriver webDriver)
         {
-            if (control.ValidateControls?.ControlValues != null && control.ValidateControls.ControlValues.Any())
+            switch (control.Type)
             {
-                switch (control.Type)
-                {
-                    case ControlType.Dropdown:
-                        DropDownValueValidation(control, webDriver);
-                        break;
-                    case ControlType.Div:
-                        DivValueValidation(control, webDriver);
-                        break;
-                    case ControlType.UrlLocation:
-                        UrlLocationValidation(control, webDriver);
-                        break;
-                }
+                case ControlType.Dropdown:
+                    DropDownValueValidation(control, webDriver);
+                    break;
+                case ControlType.Div:
+                    HtmlValueValidation(control, webDriver);
+                    break;
+                case ControlType.UrlLocation:
+                    UrlLocationValidation(control, webDriver);
+                    break;
+                case ControlType.Span:
+                    HtmlValueValidation(control, webDriver);
+                    break;
+                case ControlType.Any:
+                    HtmlValueValidation(control, webDriver);
+                    break;
             }
         }
 
@@ -306,19 +436,30 @@ namespace UltiProTests.Services
 
             if (control.ValidateControls?.ControlValues != null && control.ValidateControls.ControlValues.Any())
             {
-                foreach (string value in control.ValidateControls.ControlValues)
+                if (control.ValidateControls.ControlValues.Count == 1)
                 {
-                    Assert.IsTrue(dropdownElement.Options.Any(o => o.Text == value), $"select option:{value} not found");
+                    var option = dropdownElement.SelectedOption;
+                    var optionSelected = option.Text;
+                    var validateValue = control.ValidateControls?.ControlValues.FirstOrDefault();
+                    Assert.IsTrue(option.Text == validateValue, $"select option:{validateValue} not found");
+                }
+                else
+                {
+                    foreach (string value in control.ValidateControls.ControlValues)
+                    {
+                        Assert.IsTrue(dropdownElement.Options.Any(o => o.Text == value), $"select option:{value} not found");
+                    }
                 }
             }
         }
 
-        private static void DivValueValidation(UIControl control, IWebDriver webDriver)
+        private static void HtmlValueValidation(UIControl control, IWebDriver webDriver)
         {
-            var infoDiv = webDriver.FindElement(By.Id(control.Id));
-            if (control.Value != null)
+            if (control?.ValidateControls?.ControlValue != null)
             {
-                Assert.IsTrue(infoDiv.Text.Contains(control.Value));
+                var htmlCtrl = webDriver.FindElement(By.Id(control.Id));
+                var htmlCtrlText = htmlCtrl.Text;
+                Assert.IsTrue(htmlCtrlText.Contains(control.ValidateControls.ControlValue), $"HTML text {htmlCtrlText} not found in control {control.Id}");
             }
         }
 
@@ -330,6 +471,30 @@ namespace UltiProTests.Services
             var driverUrl = webDriver.Url;
 
             Assert.IsTrue(driverUrl == control.Value);
+        }
+
+        private static string GetInputValue(string? id, IWebDriver webDriver)
+        {
+            if (id == null)
+            {
+                return string.Empty;
+            }
+
+            var htmlCtrl = webDriver.FindElement(By.Id(id));
+            var htmlCtrlValue = htmlCtrl.GetAttribute("value").Contains('$') ? htmlCtrl.GetAttribute("value")[1..] : htmlCtrl.GetAttribute("value");
+            return htmlCtrlValue;
+        }
+
+        private static string GetHtmlValue(string? id, IWebDriver webDriver)
+        {
+            if(id == null)
+            {
+                return string.Empty;
+            }
+            
+            var htmlCtrl = webDriver.FindElement(By.Id(id));
+            var htmlCtrlText = htmlCtrl.Text.Contains('$') ? htmlCtrl.Text[1..] : htmlCtrl.Text;
+            return htmlCtrlText;
         }
     }
 }

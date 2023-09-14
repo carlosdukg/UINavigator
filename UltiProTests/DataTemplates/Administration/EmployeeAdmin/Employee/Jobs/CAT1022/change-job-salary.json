@@ -1,0 +1,208 @@
+{
+  "login": {
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_CABP",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.TopMenu",
+        "path": "Administration>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.Administration.AdministrationMenu",
+        "path": "EmployeeAdmin>MyEmployees"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "objectValue": {
+            "search": {
+              "searchButtonControlId": "GridView1_filterButton"
+            },
+            "select": {
+              "colindex": 1,
+              "value": "829309286"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "UINavigator.Menus.Administration.EmployeeMenu",
+        "path": "Jobs>JobSummary"
+      }
+    },
+    {
+      "type": "PopUp",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "",
+          "delayInSeconds": 2
+        },
+        {
+          "id": "rightMenu",
+          "type": "RightMenuLink",
+          "value": "0:1"
+        },
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "last"
+        }
+      ]
+    },
+    {
+      "type": "Wizard",
+      "wizardSteps": [
+        {
+          "name": "job",
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ccJobEffectiveDate_user",
+              "type": "input",
+              "value": "09/08/2023"
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeJob_frmChangeJob_csReason",
+              "type": "dropdown",
+              "value": "501"
+            }
+          ]
+        },
+        {
+          "name": "salary",
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer",
+              "type": "dropdown",
+              "validateControls": {
+                "controlValues": [
+                  "Hour"
+                ],
+                "disabledControls": [
+                  "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer"
+                ]
+              }
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
+              "type": "input",
+              "value": "script:37"
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualCurNewRate",
+              "type": "span",
+              "validateControls": {
+                "validationObject": {
+                  "methodName": "CalculateAnnualSalaryC",
+                  "methodControlParams": [
+                    {
+                      "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
+                      "Type": "input"
+                    },
+                    {
+                      "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblViewScheduledHours",
+                      "Type": "span"
+                    }
+                  ],
+                  "methodReturnType": "double",
+                  "controlToValidateId": {
+                    "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNewNewRate",
+                    "Type": "span"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "review",
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "summary",
+          "moveNext": false,
+          "controls": [
+            {
+              "id": "AnnualsalaryBefore",
+              "type": "any",
+              "validateControls": {
+                "validationObject": {
+                  "methodName": "CalculateAnnualSalaryC",
+                  "methodControlParams": [
+                    {
+                      "Id": "ScheduledhoursBefore",
+                      "Type": "any"
+                    },
+                    {
+                      "Id": "HourlypayrateBefore",
+                      "Type": "any"
+                    }
+                  ],
+                  "methodReturnType": "double",
+                  "controlToValidateId": {
+                    "Id": "AnnualsalaryBefore",
+                    "Type": "any"
+                  }
+                }
+              }
+            },
+            {
+              "id": "AnnualsalaryAfter",
+              "type": "any",
+              "validateControls": {
+                "HiddenControls": {
+                  "methodName": "CalculateAnnualSalaryC",
+                  "methodControlParams": [
+                    {
+                      "Id": "ScheduledhoursAfter",
+                      "Type": "any"
+                    },
+                    {
+                      "Id": "HourlypayrateAfter",
+                      "Type": "any"
+                    }
+                  ],
+                  "methodReturnType": "double",
+                  "controlToValidateId": {
+                    "Id": "AnnualsalaryAfter",
+                    "Type": "any"
+                  }
+                }
+              }
+            },
+            {
+              "id": "ctl00_btnSave",
+              "type": "buttonClick",
+              "value": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -17,6 +17,7 @@ namespace UINavigator.Models.Enums.Employee
         JobSummary,
         JobHistory,
         Personal,
-        EmployeeSummary
+        EmployeeSummary,
+        Compensation
     }
 }

@@ -1,0 +1,205 @@
+{
+  "login": {
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_CABP",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.TopMenu",
+        "path": "Administration>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.Administration.AdministrationMenu",
+        "path": "EmployeeAdmin>MyEmployees"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "objectValue": {
+            "search": {
+              "findByContorlId": "GridView1_firstSelect_0",
+              "findByControlValue": "Last name",
+              "operatorControlId": "GridView1_Operator_0",
+              "operatorControlValue": "Contains",
+              "searchInputControlId": "GridView1_TextEntryFilterControlInputBox_0",
+              "searchInputControlValue": "Boman",
+              "searchButtonControlId": "GridView1_filterButton"
+            },
+            "select": {
+              "colindex": 0,
+              "value": "Boman (Banasat), Gwen M."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "UINavigator.Menus.Administration.EmployeeMenu",
+        "path": "Jobs>JobSummary"
+      }
+    },
+    {
+      "type": "PopUp",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "",
+          "delayInSeconds": 2
+        },
+        {
+          "id": "rightMenu",
+          "type": "RightMenuLink",
+          "value": "1:0"
+        },
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "last"
+        }
+      ]
+    },
+    {
+      "type": "Wizard",
+      "wizardSteps": [
+        {
+          "name": "salary",
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "calJobEff_user",
+              "type": "input",
+              "value": "09/08/2023"
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csReason",
+              "type": "dropdown",
+              "value": "501"
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer",
+              "type": "dropdown",
+              "value": "H",
+              "validateControls": {
+                "enabledControls": [
+                  "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer"
+                ]
+              }
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
+              "type": "input",
+              "value": "script:41",
+              "delayInSeconds": 2
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNew",
+              "type": "span",
+              "validateControls": {
+                "hiddenControls": [
+                  "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNewNewRate"
+                ],
+                "validationObject": {
+                  "methodName": "ValidateCoreAnnualSalary",
+                  "methodControlParams": [
+                    {
+                      "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
+                      "Type": "input"
+                    },
+                    {
+                      "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_txbScheduledHours",
+                      "Type": "input"
+                    },
+                    {
+                      "Id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNew",
+                      "Type": "span"
+                    }
+                  ],
+                  "methodReturnType": "bool"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "review",
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "summary",
+          "moveNext": false,
+          "controls": [
+            {
+              "id": "AnnualsalaryBefore",
+              "type": "any",
+              "validateControls": {
+                "validationObject": {
+                  "methodName": "ValidateCoreAnnualSalary",
+                  "methodControlParams": [
+                    {
+                      "Id": "ScheduledhoursBefore",
+                      "Type": "any"
+                    },
+                    {
+                      "Id": "HourlypayrateBefore",
+                      "Type": "any"
+                    },
+                    {
+                      "id": "AnnualsalaryBefore",
+                      "type": "any"
+                    }
+                  ],
+                  "methodReturnType": "bool"
+                }
+              }
+            },
+            {
+              "id": "AnnualsalaryAfter",
+              "type": "any",
+              "validateControls": {
+                "validationObject": {
+                  "methodName": "ValidateCoreAnnualSalary",
+                  "methodControlParams": [
+                    {
+                      "Id": "ScheduledhoursAfter",
+                      "Type": "any"
+                    },
+                    {
+                      "Id": "HourlypayrateAfter",
+                      "Type": "any"
+                    },
+                    {
+                      "id": "AnnualsalaryAfter",
+                      "type": "any"
+                    }
+                  ],
+                  "methodReturnType": "bool"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "login": {
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_CABP",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.TopMenu",
+        "path": "MyTeam>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.MyTeam.MyTeamMenu",
+        "path": "MyEmployees>"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "objectValue": {
+            "search": {
+              "searchButtonControlId": "GridView1_filterButton"
+            },
+            "select": {
+              "colindex": 1,
+              "value": "829309286"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "UINavigator.Menus.MyTeam.EmployeeMenu",
+        "path": "Jobs>JobHistory"
+      }
+    },
+    {
+      "type": "PopUp",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_btnAdd",
+          "type": "buttonClick",
+          "validateControls": {
+            "visibleControls": [],
+            "hiddenControls": [],
+            "requiredControls": [],
+            "notrequiredControls": [],
+            "disabledControls": [
+              "ctl00_Content_frmJobHistoryAddChg_txtAnnual",
+              "ctl00_Content_frmJobHistoryAddChg_txtPeriod",
+              "ctl00_Content_frmJobHistoryAddChg_txtWeekly"
+            ]
+          }
+        },
+        {
+          "id": "ctl00_Content_frmJobHistoryAddChg_txtAnnualNewRate",
+          "type": "input",
+          "validateControls": {
+            "validationObject": {
+              "methodName": "CalculateAnnualSalaryC",
+              "methodControlParams": [
+                {
+                  "Id": "ctl00_Content_frmJobHistoryAddChg_txtHourly",
+                  "Type": "input"
+                },
+                {
+                  "Id": "ctl00_Content_frmJobHistoryAddChg_txbScheduledHours",
+                  "Type": "input"
+                }
+              ],
+              "methodReturnType": "double",
+              "controlToValidateId": {
+                "Id": "ctl00_Content_frmJobHistoryAddChg_txtAnnualNewRate",
+                "Type": "input"
+              }
+            }
+          }
+        },
+        {
+          "id": "ctl00_Content_frmJobHistoryAddChg_txtHourly",
+          "type": "input",
+          "value": "36",
+          "validateControls": {
+            "validationObject": {
+              "methodName": "CalculateAnnualSalaryC",
+              "methodControlParams": [
+                {
+                  "Id": "ctl00_Content_frmJobHistoryAddChg_txtHourly",
+                  "Type": "input"
+                },
+                {
+                  "Id": "ctl00_Content_frmJobHistoryAddChg_txbScheduledHours",
+                  "Type": "input"
+                }
+              ],
+              "methodReturnType": "double",
+              "controlToValidateId": {
+                "Id": "ctl00_Content_frmJobHistoryAddChg_txtAnnualNewRate",
+                "Type": "input"
+              }
+            }
+          }
+        },
+        {
+          "id": "CalJobEffDate_user",
+          "type": "input",
+          "value": "08/03/2023"
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "AnnualsalaryAfter",
+          "type": "any",
+          "validateControls": {
+            "validationObject": {
+              "methodName": "CalculateAnnualSalaryC",
+              "methodControlParams": [
+                {
+                  "Id": "ScheduledhoursAfter",
+                  "Type": "any"
+                },
+                {
+                  "Id": "HourlypayrateAfter",
+                  "Type": "any"
+                }
+              ],
+              "methodReturnType": "double",
+              "controlToValidateId": {
+                "Id": "AnnualsalaryAfter",
+                "Type": "any"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "login": {
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_CABP",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.TopMenu",
+        "path": "Administration>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.Administration.AdministrationMenu",
+        "path": "EmployeeAdmin>MyEmployees"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "objectValue": {
+            "search": {
+              "searchButtonControlId": "GridView1_filterButton"
+            },
+            "select": {
+              "colindex": 1,
+              "value": "299887768"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "UINavigator.Menus.Administration.EmployeeMenu",
+        "path": "Jobs>JobSummary"
+      }
+    },
+    {
+      "type": "PopUp",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "",
+          "delayInSeconds": 2
+        },
+        {
+          "id": "rightMenu",
+          "type": "RightMenuLink",
+          "value": "0:1"
+        },
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": "last"
+        }
+      ]
+    },
+    {
+      "type": "Wizard",
+      "wizardSteps": [
+        {
+          "name": "job",
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ccJobEffectiveDate_user",
+              "type": "input",
+              "value": "09/07/2023"
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeJob_frmChangeJob_csReason",
+              "type": "dropdown",
+              "value": "501"
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeJob_frmChangeJob_csPayGroup",
+              "type": "dropdown",
+              "value": "MEXPAY"
+            }
+          ]
+        },
+        {
+          "name": "salary",
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer",
+              "type": "dropdown",
+              "validateControls": {
+                "controlValues": [
+                  ""
+                ],
+                "enabledControls": [
+                  "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer"
+                ]
+              }
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csRatesPer",
+              "type": "dropdown",
+              "value" :  "H"
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_tbRate",
+              "type": "input",
+              "value": "script:50"
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_csPaymentsPerYear",
+              "type": "dropdown",
+              "value": "12"
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualCur",
+              "type": "span",
+              "validateControls": {
+              }
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualCur",
+              "type": "span",
+              "validateControls": {
+                "validateControls": {
+                  "controlValue": "60,000.00"
+                }
+              }
+            },
+            {
+              "id": "ctl00_Content_uc_eeChangeSalary_frmChangeSalary_lblAnnualNew",
+              "type": "span",
+              "validateControls": {
+                "validateControls": {
+                  "controlValue": "93,336.00"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "review",
+          "moveNext": true,
+          "controls": []
+        },
+        {
+          "name": "summary",
+          "moveNext": false,
+          "controls": [
+            {
+              "id": "AnnualsalaryBefore",
+              "type": "any",
+              "validateControls": {
+                "validateControls": {
+                  "controlValue": "60,000.00 MXN"
+                }
+              }
+            },
+            {
+              "id": "AnnualsalaryAfter",
+              "type": "any",
+              "validateControls": {
+                "validateControls": {
+                  "controlValue": "93,336.00 MXN"
+                }
+              }
+            },
+            {
+              "id": "ctl00_btnSave",
+              "type": "buttonClick",
+              "value": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

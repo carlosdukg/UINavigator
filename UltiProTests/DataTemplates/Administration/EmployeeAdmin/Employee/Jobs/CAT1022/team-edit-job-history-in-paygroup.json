@@ -1,0 +1,161 @@
+{
+  "login": {
+    "url": "https://rcda2000s2web.dlas1.ucloud.int/Login.aspx",
+    "isSSOUser": false,
+    "username": "fosterj_CABP",
+    "password": "password"
+  },
+  "actions": [
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.TopMenu",
+        "path": "MyTeam>"
+      }
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "handler": "UINavigator.Menus.MyTeam.MyTeamMenu",
+        "path": "MyEmployees"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_GridView1",
+          "type": "gridSearchAndSelect",
+          "objectValue": {
+            "search": {
+              "searchButtonControlId": "GridView1_filterButton"
+            },
+            "select": {
+              "colindex": 1,
+              "value": "829309286"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "navigate",
+      "navigation": {
+        "IsPopUp": true,
+        "handler": "UINavigator.Menus.MyTeam.EmployeeMenu",
+        "path": "Jobs>JobHistory"
+      }
+    },
+    {
+      "type": "page",
+      "controls": [
+        {
+          "id": "ContentFrame",
+          "type": "switchFrame",
+          "value": ""
+        },
+        {
+          "id": "ctl00_Content_grvEEJobHistory",
+          "type": "gridSearchAndSelect",
+          "objectValue": {
+            "search": {
+              "SearchButtonControlId": "grvEEJobHistory_filterButton"
+            },
+            "select": {
+              "colindex": 0,
+              "value": "09/06/2023"
+            }
+          }
+        },
+        {
+          "id": "ctl00_btnEdit",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "ctl00_Content_frmJobHistoryAddChg_txtHourly",
+          "type": "input",
+          "value": "35",
+          "validateControls": {
+            "validationObject": {
+              "methodName": "CalculateAnnualSalaryC",
+              "methodControlParams": [
+                {
+                  "Id": "ctl00_Content_frmJobHistoryAddChg_txtHourly",
+                  "Type": "input"
+                },
+                {
+                  "Id": "ctl00_Content_frmJobHistoryAddChg_txbScheduledHours",
+                  "Type": "input"
+                }
+              ],
+              "methodReturnType": "double",
+              "controlToValidateId": {
+                "Id": "ctl00_Content_frmJobHistoryAddChg_txtAnnualNewRate",
+                "Type": "input"
+              }
+            }
+          }
+        },
+        {
+          "id": "ctl00_btnSave",
+          "type": "buttonClick",
+          "value": null
+        },
+        {
+          "id": "AnnualsalaryBefore",
+          "type": "any",
+          "validateControls": {
+            "validationObject": {
+              "methodName": "CalculateAnnualSalaryC",
+              "methodControlParams": [
+                {
+                  "Id": "HourlypayrateBefore",
+                  "Type": "any"
+                },
+                {
+                  "Id": "ScheduledhoursBefore",
+                  "Type": "any"
+                }
+              ],
+              "methodReturnType": "double",
+              "controlToValidateId": {
+                "Id": "AnnualsalaryBefore",
+                "Type": "any"
+              }
+            }
+          }
+        },
+        {
+          "id": "AnnualsalaryAfter",
+          "type": "any",
+          "validateControls": {
+            "validationObject": {
+              "methodName": "CalculateAnnualSalaryC",
+              "methodControlParams": [
+                {
+                  "Id": "HourlypayrateAfter",
+                  "Type": "any"
+                },
+                {
+                  "Id": "ScheduledhoursAfter",
+                  "Type": "any"
+                }
+              ],
+              "methodReturnType": "double",
+              "controlToValidateId": {
+                "Id": "AnnualsalaryAfter",
+                "Type": "any"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -25,7 +25,34 @@
     <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\add-job-history-2.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\add-job-history-1.json">
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\change-job-salary-not-in-group.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\change-salary-not-in-group.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\job-history-detail-not-in-paygroup.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\team-edit-job-history-in-paygroup.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\team-add-job-history-in-paygroup.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\admin-add-job-history-in-paygroup.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\change-job-salary.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\job-history-detail-in-paygroup.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\job-summary-in-paygroup.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\job-summary-not-in-paygroup.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\change-job-2.json">
@@ -37,13 +64,13 @@
     <None Update="DataTemplates\Administration\EmployeeAdmin\MyEmployees\add-employee-add-direct-deposit.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Personal\transfer-employee.json">
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Personal\CAT1022\transfer-employee.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataTemplates\Administration\EmployeeAdmin\MyEmployees\my-employees-add-auto.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="DataTemplates\MyTeam\MyEmployees\add-canadian-employee.json">
+    <None Update="DataTemplates\MyTeam\MyEmployees\CAT1022\add-canadian-employee.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataTemplates\MyTeam\MyEmployees\add-employee-edit-direct-deposit.json">
@@ -70,7 +97,7 @@
     <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Benefits\AddVaccine\my-employees-add-vaccine-test-tb-pt-tb-results.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\change-job-salary.json">
+    <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\CAT1022\change-salary.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Jobs\change-job-1.json">
@@ -124,7 +151,7 @@
     <None Update="DataTemplates\MySelf\Personal\personal-address-change-USL1001.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="DataTemplates\MyTeam\MyEmployees\add-employee.json">
+    <None Update="DataTemplates\MyTeam\MyEmployees\CAT1022\add-employee.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataTemplates\MyTeam\MyEmployees\Employee\change-job-and-salary.json">
