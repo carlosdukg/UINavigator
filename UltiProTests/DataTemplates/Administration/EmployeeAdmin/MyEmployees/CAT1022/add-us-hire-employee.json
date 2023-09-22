@@ -305,6 +305,11 @@
                   }
                 }
               }
+            },
+            {
+              "id": "ctl00_btnSave",
+              "type": "buttonClick",
+              "value": null
             }
           ]
         }
