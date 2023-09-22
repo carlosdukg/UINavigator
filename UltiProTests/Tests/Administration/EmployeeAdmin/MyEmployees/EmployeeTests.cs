@@ -102,5 +102,74 @@ namespace UltiProTests.Tests.AdministrationTopMenu.EmployeeAdmin.MyEmployees
             //*** execute UI actions ***//
             await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
         }
+
+        #region CAT1022
+
+        [TestMethod]
+        public async Task Add_Old_Hire_US_Employee()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/MyEmployees/add-employee.json");
+            if (_driver == null)
+            {
+                Assert.Fail("Null selenium driver");
+            }
+            if (uiTest == null)
+            {
+                Assert.Fail("Null test template");
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest?.Login?.Username, uiTest?.Login?.Password, uiTest?.Login?.Url, uiTest?.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
+        public async Task Add_New_Hire_Canadian_Employee()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/MyEmployees/CAT1022/add-canadian-employee.json");
+            if (_driver == null)
+            {
+                Assert.Fail("Null selenium driver");
+            }
+            if (uiTest == null)
+            {
+                Assert.Fail("Null test template");
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest?.Login?.Username, uiTest?.Login?.Password, uiTest?.Login?.Url, uiTest?.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
+        public async Task Add_New_Hire_US_Employee()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/Administration/EmployeeAdmin/MyEmployees/CAT1022/add-us-hire-employee.json");
+            if (_driver == null)
+            {
+                Assert.Fail();
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest?.Login?.Username, uiTest?.Login?.Password, uiTest?.Login?.Url, uiTest?.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
+        }
+
+        #endregion
     }
 }

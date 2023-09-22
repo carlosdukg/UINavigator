@@ -10,14 +10,14 @@
       "type": "navigate",
       "navigation": {
         "handler": "UINavigator.Menus.TopMenu",
-        "path": "MyTeam>"
+        "path": "Administration>"
       }
     },
     {
       "type": "navigate",
       "navigation": {
-        "handler": "UINavigator.Menus.MyTeam.MyTeamMenu",
-        "path": "MyEmployees>"
+        "handler": "UINavigator.Menus.Administration.AdministrationMenu",
+        "path": "EmployeeAdmin>MyEmployees>"
       }
     },
     {
@@ -71,18 +71,18 @@
             {
               "id": "ctl00_Content_StartFV_txbNameFirst",
               "type": "input",
-              "value": "Kelly_6"
+              "value": "CORP_FNAME"
             },
             {
               "id": "ctl00_Content_StartFV_txbNameLast",
               "type": "input",
-              "value": "Slater_6"
+              "value": "CORP_LNAME"
             }
           ]
         },
         {
           "name": "personal",
-          "delayInSeconds": 5,
+          "delayInSeconds": 3,
           "moveNext": true,
           "controls": [
             {
@@ -125,7 +125,7 @@
             {
               "name": "calDateOfLastHire_user",
               "type": "input",
-              "value": "04/01/2023"
+              "value": "01/23/2021"
             }
           ]
         },
@@ -137,32 +137,23 @@
             {
               "id": "ctl00_Content_FormView1_csJob",
               "type": "dropdown",
-              "value": "ADMIN"
+              "value": "ADMINA"
             },
             {
               "id": "ctl00_Content_FormView1_cdlLocation",
               "type": "dropdown",
-              "value": "NYN",
+              "value": "MN",
               "delayInSeconds": 3
-            },
-            {
-              "id": "ctl00_Content_FormView1_csPayGroup",
-              "type": "dropdown",
-              "value": "CORPBI",
-              "validateControls": {
-                "disabledControls": [
-                  "ctl00_Content_FormView1_csRatesPer"
-                ]
-              }
             },
             {
               "id": "ctl00_Content_FormView1_csRatesPer",
               "type": "dropdown",
-              "validateControls": {
-                "controlValues": [
-                  "Hour"
-                ]
-              }
+              "value": "H"
+            },
+            {
+              "id": "ctl00_Content_FormView1_csPayGroup",
+              "type": "dropdown",
+              "value": "CORPBI"
             },
             {
               "id": "ctl00_Content_FormView1_csEarningGroup",
@@ -231,27 +222,7 @@
           "name": "localTax",
           "delayInSeconds": 2,
           "moveNext": true,
-          "controls": [
-            {
-              "id": "ctl00_Content_uc_LocalTaxWorkInDetail_rbWorkInTaxResident",
-              "type": "radio"
-            },
-            {
-              "id": "ctl00_Content_uc_LocalTaxWorkInDetail_GridViewLocalWorkInTaxes_ctl02_ddlLTFilingStatus",
-              "type": "dropdown",
-              "value": "M"
-            },
-            {
-              "id": "ctl00_Content_uc_LocalTaxResidentDetail_fvLocalResidentTaxes_ddlResLocalTaxCode",
-              "type": "dropdown",
-              "value": "NY003"
-            },
-            {
-              "id": "ctl00_Content_uc_LocalTaxResidentDetail_fvLocalResidentTaxes_ddlResLTFilingStatus",
-              "type": "dropdown",
-              "value": "M"
-            }
-          ]
+          "controls": []
         },
         {
           "name": "PTO",
@@ -265,50 +236,11 @@
           "moveNext": false,
           "controls": [
             {
-              "id": "AnnualRateAfter",
-              "type": "any",
-              "validateControls": {
-                "validationObject": {
-                  "methodName": "CalculateAnnualSalaryC",
-                  "methodControlParams": [
-                    {
-                      "Id": "ScheduledhoursAfter",
-                      "Type": "any"
-                    },
-                    {
-                      "Id": "HourlyRateAfter",
-                      "Type": "any"
-                    }
-                  ],
-                  "methodReturnType": "double",
-                  "controlToValidateId": {
-                    "Id": "AnnualRateAfter",
-                    "Type": "any"
-                  }
-                }
-              }
+              "id": "ctl00_btnSave",
+              "type": "buttonClick",
+              "value": null
             }
           ]
-        }
-      ]
-    },
-    {
-      "type": "page",
-      "controls": [
-        {
-          "id": "ctl00_submitProcessMessage",
-          "type": "div",
-          "value": "You must select Submit to complete this request."
-        },
-        {
-          "id": "ctl00_btnSave",
-          "type": "buttonClick",
-          "value": null
-        },
-        {
-          "id": "",
-          "type": "UrlLocation",
-          "value": "https://rcda2000s2web.dlas1.ucloud.int/default.aspx"
         }
       ]
     }

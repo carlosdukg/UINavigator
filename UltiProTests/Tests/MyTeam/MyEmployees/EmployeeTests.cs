@@ -7,7 +7,7 @@ using UltiProTests.Services;
 namespace UltiProTests.Tests.ATopMenu.EmployeeAdmin.MyEmployees
 {
     [TestClass]
-    public class AddEmployeeTests
+    public class EmployeeTests
     {
         private IWebDriver? _driver;
         private ChromeWebDriver? _chormeDriver;
@@ -88,6 +88,25 @@ namespace UltiProTests.Tests.ATopMenu.EmployeeAdmin.MyEmployees
             //*** arrange ***//
             var uiTest = await TestHelper
                 .LoadUITest(@"DataTemplates/MyTeam/MyEmployees/CAT1022/add-canadian-employee.json");
+            if (_driver == null)
+            {
+                Assert.Fail();
+            }
+
+            //*** navigate and login ***//               
+            _navigate?
+                .Login(uiTest?.Login?.Username, uiTest?.Login?.Password, uiTest?.Login?.Url, uiTest?.Login?.IsSSOUser);
+
+            //*** execute UI actions ***//
+            await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
+        }
+
+        [TestMethod]
+        public async Task MyTeam_MyEmployees_Add_US_Hire_Employee()
+        {
+            //*** arrange ***//
+            var uiTest = await TestHelper
+                .LoadUITest(@"DataTemplates/MyTeam/MyEmployees/CAT1022/add-us-hire-employee.json");
             if (_driver == null)
             {
                 Assert.Fail();
