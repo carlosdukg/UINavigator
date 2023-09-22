@@ -56,7 +56,7 @@
             {
               "id": "NationalIdSearch",
               "type": "input",
-              "value": "269 025 474"
+              "value": "method:GenerateSSN"
             },
             {
               "id": "SearchButton",
@@ -72,13 +72,13 @@
             {
               "id": "hireTargetCompanies",
               "type": "dropdown",
-              "value": "95ZIE",
+              "value": "HDLBX",
               "delayInSeconds": 2
             },
             {
               "id": "txtNationalIdConfirmed",
               "type": "input",
-              "value": "269 025 474",
+              "value": "method:GenerateSSN",
               "delayBeforeInSeconds": 3
             }
           ]
@@ -91,12 +91,12 @@
             {
               "id": "ctl00_Content_frmPersonal_txbFirstName",
               "type": "input",
-              "value": "TestCANFname"
+              "value": "TestUSFname"
             },
             {
               "id": "ctl00_Content_frmPersonal_txbLastName",
               "type": "input",
-              "value": "TestCANLname"
+              "value": "TestUSLname"
             },
             {
               "id": "calDateOfBirth_user",
@@ -104,29 +104,29 @@
               "value": "01/01/2000"
             },
             {
-              "id": "ctl00_Content_frmPersonal_csCountry",
+              "id": "ctl00_Content_frmPersonal_csGender",
               "type": "dropdown",
-              "value": "CAN"
+              "value": "M"
             },
             {
               "id": "ctl00_Content_frmPersonal_txbAddressLine1",
               "type": "input",
-              "value": "4711 Hardy Street"
+              "value": "101 SW 3 AVE"
             },
             {
               "name": "ctl00_Content_frmPersonal_txbAddressCity",
               "type": "input",
-              "value": "Kelowna"
+              "value": "Miami"
             },
             {
               "id": "ctl00_Content_frmPersonal_csState",
               "type": "dropdown",
-              "value": "BC"
+              "value": "NY"
             },
             {
               "name": "ctl00_Content_frmPersonal_txbAddressZipCode",
               "type": "input",
-              "value": "V1Y 8H2"
+              "value": "33025"
             }
           ]
         },
@@ -149,12 +149,12 @@
             {
               "id": "ctl00_Content_frmJob_csJob",
               "type": "dropdown",
-              "value": "CANASST2"
+              "value": "ADMIN"
             },
             {
               "id": "ctl00_Content_frmJob_csLocation",
               "type": "dropdown",
-              "value": "TORONT"
+              "value": "NYN"
             }
           ]
         },
@@ -166,7 +166,7 @@
             {
               "id": "ctl00_Content_frmPayroll_csPayGroup",
               "type": "dropdown",
-              "value": "CANBW"
+              "value": "CORPBI"
             },
             {
               "id": "ctl00_Content_frmPayroll_csPayPer",
@@ -184,18 +184,18 @@
             {
               "id": "ctl00_Content_frmPayroll_txbPayRate",
               "type": "input",
-              "value": "60",
+              "value": "25",
               "delayInSeconds": 2
             },
             {
               "id": "ctl00_Content_frmPayroll_csEarningGroup",
               "type": "dropdown",
-              "value": "CANAD"
+              "value": "ADMIN"
             },
             {
               "id": "ctl00_Content_frmPayroll_csDeductionGroup",
               "type": "dropdown",
-              "value": "CAN"
+              "value": "ADMIN"
             },
             {
               "id": "ctl00_Content_frmPayroll_csEmployeeType",
@@ -228,10 +228,42 @@
           "controls": []
         },
         {
-          "name": "provincialIncomeTax",
+          "name": "stateTax",
+          "delayInSeconds": 8,
+          "moveNext": true,
+          "controls": [
+            {
+              "id": "ctl00_Content_fv_csResidentCounty",
+              "type": "dropdown",
+              "value": "WESTCHESTER"
+            }
+          ]
+        },
+        {
+          "name": "localTax",
           "delayInSeconds": 2,
           "moveNext": true,
-          "controls": []
+          "controls": [
+            {
+              "id": "ctl00_Content_uc_LocalTaxWorkInDetail_rbWorkInTaxResident",
+              "type": "radio"
+            },
+            {
+              "id": "ctl00_Content_uc_LocalTaxWorkInDetail_GridViewLocalWorkInTaxes_ctl02_ddlLTFilingStatus",
+              "type": "dropdown",
+              "value": "M"
+            },
+            {
+              "id": "ctl00_Content_uc_LocalTaxResidentDetail_fvLocalResidentTaxes_ddlResLocalTaxCode",
+              "type": "dropdown",
+              "value": "NY003"
+            },
+            {
+              "id": "ctl00_Content_uc_LocalTaxResidentDetail_fvLocalResidentTaxes_ddlResLTFilingStatus",
+              "type": "dropdown",
+              "value": "M"
+            }
+          ]
         },
         {
           "name": "directDeposit",
@@ -273,6 +305,11 @@
                   }
                 }
               }
+            },
+            {
+              "id": "ctl00_btnSave",
+              "type": "buttonClick",
+              "value": null
             }
           ]
         }

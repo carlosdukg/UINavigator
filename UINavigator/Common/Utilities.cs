@@ -1,4 +1,5 @@
-﻿using UINavigator.Common.Contracts;
+﻿using System;
+using UINavigator.Common.Contracts;
 using UINavigator.Models;
 using UINavigator.Models.UIModels;
 using UINavigator.Services;
@@ -52,10 +53,11 @@ namespace UINavigator.Common
 
         public string GenerateEMPNum()
         {
+            var _random = new Random();
             var empnum = _cache.Get<string>("empnum");
             if (empnum == null)
             {
-                empnum = "1030";
+                empnum = _random.Next(0, 9999).ToString("D4");
                 _cache.Set("empnum", empnum);
             }
             else

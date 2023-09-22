@@ -67,10 +67,22 @@
     <None Update="DataTemplates\Administration\EmployeeAdmin\Employee\Personal\CAT1022\transfer-employee.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\MyEmployees\CAT1022\add-canadian-employee.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\MyEmployees\CAT1022\add-employee.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\Administration\EmployeeAdmin\MyEmployees\CAT1022\add-us-hire-employee.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="DataTemplates\Administration\EmployeeAdmin\MyEmployees\my-employees-add-auto.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataTemplates\MyTeam\MyEmployees\CAT1022\add-canadian-employee.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="DataTemplates\MyTeam\MyEmployees\CAT1022\add-us-hire-employee.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="DataTemplates\MyTeam\MyEmployees\add-employee-edit-direct-deposit.json">

@@ -329,7 +329,7 @@ namespace UltiProTests.Services
                 Type utilsType = utils.GetType();
                 if (!string.IsNullOrWhiteSpace(methodName))
                 {
-                    MethodInfo? ctrlMethod = utilsType.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
+                    MethodInfo? ctrlMethod = utilsType.GetMethod(methodName, BindingFlags.Public | BindingFlags.Static);
                     object? expectedControlValue;
                     if (control?.ValidateControls.ValidationObject.MethodReturnType == DataTypes.Double)
                     {
