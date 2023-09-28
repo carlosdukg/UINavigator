@@ -19,6 +19,6 @@ namespace UINavigator.Common.Contracts
         /// <param name="password">Password</param>
         /// <param name="location">Site login URL</param>
         /// <param name="isSSOUser">Flag to indicate if the user is SSO</param>
-        void OpenBrowserAndLogin(string? username, string? password, string? location, bool? isSSOUser);
+        void OpenBrowserAndLogin(string username, string password, string location, bool isSSOUser);
     }
 }

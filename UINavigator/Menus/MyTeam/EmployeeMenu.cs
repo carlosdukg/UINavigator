@@ -33,15 +33,15 @@ namespace UINavigator.Menus.MyTeam
                 {
                     if (menuElements[navigation] != null) // refactor
                     {
-                        menuElements[navigation]?.Click();
+                        menuElements[navigation].Click();
                     }
                 }
             }
         }
 
-        public Dictionary<string, IWebElement?> EmployeeMenuOptions()
+        public Dictionary<string, IWebElement> EmployeeMenuOptions()
         {
-            return new Dictionary<string, IWebElement?>
+            return new Dictionary<string, IWebElement>
             {
                  { EmployeeMenuOption.Jobs.ToString(), GetElement(Jobs) },
                  { EmployeeMenuOption.JobSummary.ToString(), GetElement(JobSummary) },
@@ -52,7 +52,7 @@ namespace UINavigator.Menus.MyTeam
             };
         }
 
-        private IWebElement? GetElement(string elementId)
+        private IWebElement GetElement(string elementId)
         {
             try
             {

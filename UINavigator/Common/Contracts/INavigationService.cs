@@ -15,7 +15,7 @@ namespace UINavigator.Common.Contracts
         /// <param name="password">Password</param>
         /// <param name="location">Site login URL</param>
         /// <param name="isSSOUser">Flag to indicate if the user is SSO</param>
-        Navigation Login(string? username, string? password, string? location, bool? isSSOUser);
+        Navigation Login(string username, string password, string location, bool isSSOUser);
 
         /// <summary>
         /// Navigate web application on specific route path.

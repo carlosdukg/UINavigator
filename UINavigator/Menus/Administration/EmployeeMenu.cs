@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
 using UINavigator.Models.Enums.Employee;
 
 namespace UINavigator.Menus.Administration
@@ -32,15 +34,15 @@ namespace UINavigator.Menus.Administration
                 {
                     if (menuElements[navigation] != null) // refactor
                     {
-                        menuElements[navigation]?.Click();
+                        menuElements[navigation].Click();
                     }
                 }
             }
         }
 
-        public Dictionary<string, IWebElement?> EmployeeMenuOptions()
+        public Dictionary<string, IWebElement> EmployeeMenuOptions()
         {
-            return new Dictionary<string, IWebElement?>
+            return new Dictionary<string, IWebElement>
             {
                  { EmployeeMenuOption.CareerEducation.ToString(), GetElement(CareerEducation) },
                  { EmployeeMenuOption.EmployeeVaccinationTest.ToString(), GetElement(EmployeeVaccinationTest) },
@@ -55,7 +57,7 @@ namespace UINavigator.Menus.Administration
             };
         }
 
-        private IWebElement? GetElement(string elementId)
+        private IWebElement GetElement(string elementId)
         {
             try
             {

@@ -1,4 +1,6 @@
-﻿using UINavigator.Models;
+﻿using System;
+using System.Collections.Generic;
+using UINavigator.Models;
 using UINavigator.Models.UIModels;
 
 namespace UINavigator.Common.Contracts
@@ -22,14 +24,14 @@ namespace UINavigator.Common.Contracts
         /// <param name="stepName">Wizard step name</param>
         /// <param name="entryAction">Entry action object</param>
         /// <returns></returns>
-        UIWizardStep? GetWizardStep(Enum stepName, EntryAction entryAction);
+        UIWizardStep GetWizardStep(Enum stepName, EntryAction entryAction);
 
         /// <summary>
         /// Get wizard step object from json test template. 
         /// </summary>
         /// <param name="entryAction">Entry action object</param>
         /// <returns></returns>
-        IEnumerable<UIWizardStep?> GetWizardSteps(UIAction entryAction);
+        IEnumerable<UIWizardStep> GetWizardSteps(UIAction entryAction);
 
         string GetCache();
     }

@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System;
 using UINavigator.Common.Contracts;
 using UINavigator.Models.UIModels;
 
@@ -22,7 +23,7 @@ namespace UINavigator.Common
         }
 
         /// <inheritdoc/>
-        public Navigation Login(string? username, string? password, string? location, bool? isSSOUser)
+        public Navigation Login(string username, string password, string location, bool isSSOUser)
         {
             _login.OpenBrowserAndLogin(username, password, location, isSSOUser);
             return this;
@@ -39,8 +40,8 @@ namespace UINavigator.Common
             var menuType = Type.GetType(menuObj);
             if (menuType != null)
             {
-                dynamic? menu = Activator.CreateInstance(menuType, _driver);
-                menu?.NavigateToPath(navigation.Path);
+                dynamic menu = Activator.CreateInstance(menuType, _driver);
+                menu.NavigateToPath(navigation.Path);
             }
             return this;
         }

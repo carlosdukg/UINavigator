@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System.Collections.Generic;
 using UINavigator.Models.Enums.Site;
 
 namespace UINavigator.Menus

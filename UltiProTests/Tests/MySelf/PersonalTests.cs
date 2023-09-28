@@ -3,16 +3,18 @@ using UINavigator.Common.Contracts;
 using UINavigator.Common;
 using OpenQA.Selenium;
 using UltiProTests.Services;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 
 namespace UltiProTests.Tests.MySelfTopMenu
 {
     [TestClass]
     public class PersonalTests
     {
-        private IWebDriver? _driver;
-        private ChromeWebDriver? _chormeDriver;
-        private IUtilitiesService? _utilities;
-        Navigation? _navigate;
+        private IWebDriver _driver;
+        private ChromeWebDriver _chormeDriver;
+        private IUtilitiesService _utilities;
+        Navigation _navigate;
 
         [TestInitialize]
         public void Initialize()
@@ -58,8 +60,8 @@ namespace UltiProTests.Tests.MySelfTopMenu
             }
 
             //*** navigate and login ***//               
-            _navigate?
-                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+            _navigate
+                .Login(uiTest.Login.Username, uiTest.Login.Password, uiTest.Login.Url, uiTest.Login.IsSSOUser);
 
             //*** execute UI actions ***//
             TestHelper.ProcessUIActions(uiTest.Actions, _driver, _utilities, _navigate);
@@ -82,8 +84,8 @@ namespace UltiProTests.Tests.MySelfTopMenu
             }
 
             //*** navigate and login ***//               
-            _navigate?
-                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+            _navigate
+                .Login(uiTest.Login.Username, uiTest.Login.Password, uiTest.Login.Url, uiTest.Login.IsSSOUser);
 
             //*** execute UI actions ***//
             TestHelper.ProcessUIActions(uiTest.Actions, _driver, _utilities, _navigate);
@@ -106,8 +108,8 @@ namespace UltiProTests.Tests.MySelfTopMenu
             }
 
             //*** navigate and login ***//               
-            _navigate?
-                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+            _navigate
+                .Login(uiTest.Login.Username, uiTest.Login.Password, uiTest.Login.Url, uiTest.Login.IsSSOUser);
 
             //*** execute UI actions ***//
             TestHelper.ProcessUIActions(uiTest.Actions, _driver, _utilities, _navigate);
@@ -130,8 +132,8 @@ namespace UltiProTests.Tests.MySelfTopMenu
             }
 
             //*** navigate and login ***//               
-            _navigate?
-                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+            _navigate
+                .Login(uiTest.Login.Username, uiTest.Login.Password, uiTest.Login.Url, uiTest.Login.IsSSOUser);
 
             //*** execute UI actions ***//
             TestHelper.ProcessUIActions(uiTest.Actions, _driver, _utilities, _navigate);
@@ -154,8 +156,8 @@ namespace UltiProTests.Tests.MySelfTopMenu
             }
 
             //*** navigate and login ***//               
-            _navigate?
-                .Login(uiTest.Login?.Username, uiTest.Login?.Password, uiTest.Login?.Url, uiTest.Login?.IsSSOUser);
+            _navigate
+                .Login(uiTest.Login.Username, uiTest.Login.Password, uiTest.Login.Url, uiTest.Login.IsSSOUser);
 
             //*** execute UI actions ***//
             TestHelper.ProcessUIActions(uiTest.Actions, _driver, _utilities, _navigate);

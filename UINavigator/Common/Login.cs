@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System;
 using UINavigator.Common.Contracts;
 
 namespace UINavigator.Common
@@ -28,7 +29,7 @@ namespace UINavigator.Common
         }
 
         /// <inheritdoc/>
-        public void OpenBrowserAndLogin(string? username, string? password, string? location, bool? isSSOUser = false)
+        public void OpenBrowserAndLogin(string username, string password, string location, bool isSSOUser = false)
         {
             _driver.Navigate().GoToUrl(location);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
@@ -36,7 +37,7 @@ namespace UINavigator.Common
             LoginWithUser(username, password, isSSOUser);
         }
 
-        private void LoginWithUser(string? username, string? password, bool? isSSOUser)
+        private void LoginWithUser(string username, string password, bool isSSOUser)
         {
             var loginUserName = _driver.FindElement(By.Id("ctl00_Content_Login1_UserName"));
             loginUserName.SendKeys(username);
@@ -46,7 +47,7 @@ namespace UINavigator.Common
             var loginButton = _driver.FindElement(By.Id("ctl00_Content_Login1_LoginButton"));
             loginButton.Click();
 
-            if (isSSOUser != null && isSSOUser.Value)
+            if (isSSOUser != null && isSSOUser)
             {
                 _customerSelector.SelectCustomerCodeWithComponent("USG");
             }

@@ -11,7 +11,7 @@
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <returns></returns>
-        T? Get<T>(string key);
+        T Get<T>(string key);
         
         /// <summary>
         /// Cache value locally in memory.

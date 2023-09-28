@@ -9,6 +9,6 @@ namespace UINavigator.Models.UI
 
         public bool PressTab { get; set; }
 
-        public string? Value { get; set; }   
+        public string Value { get; set; }   
     }
 }

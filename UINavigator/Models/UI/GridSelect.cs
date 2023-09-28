@@ -5,6 +5,6 @@ namespace UINavigator.Models.UI
     {
         public int ColIndex { get; set; }
 
-        public string? Value { get; set; }
+        public string Value { get; set; }
     }
 }

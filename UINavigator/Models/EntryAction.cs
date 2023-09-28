@@ -8,8 +8,8 @@ namespace UINavigator.Models
 {
     public class EntryAction
     {
-        public string? Type { get; set; }
+        public string Type { get; set; }
         public bool IsWizarrd { get; set; }
-        public List<UIWizardStep>? WizardSteps { get; set; }
+        public List<UIWizardStep> WizardSteps { get; set; }
     }
 }

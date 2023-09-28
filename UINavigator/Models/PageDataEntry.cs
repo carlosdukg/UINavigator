@@ -14,6 +14,6 @@ namespace UINavigator.Models
         /// <summary>
         /// 
         /// </summary>
-        public List<EntryAction>? Actions { get; set; }
+        public List<EntryAction> Actions { get; set; }
     }
 }

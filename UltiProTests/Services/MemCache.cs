@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using System;
 using UINavigator.Services;
 
 public class MemCache : IMemCache
@@ -8,9 +9,9 @@ public class MemCache : IMemCache
     public MemCache(IMemoryCache memoryCache) =>
         _memoryCache = memoryCache;
 
-    public T? Get<T>(string key)
+    public T Get<T>(string key)
     {
-        T? val = default;
+        T val = default;
         if (!_memoryCache.TryGetValue(key, out val))
         {
             return default;
@@ -21,7 +22,7 @@ public class MemCache : IMemCache
 
     public void Set<T>(string key, T value)
     {
-        if (!_memoryCache.TryGetValue(key, out T? _))
+        if (!_memoryCache.TryGetValue(key, out T _))
         {
             var cacheEntryOptions = new MemoryCacheEntryOptions()
                 .SetSlidingExpiration(TimeSpan.FromSeconds(30))

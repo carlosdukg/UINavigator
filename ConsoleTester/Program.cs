@@ -35,12 +35,12 @@ app.OnExecute(() =>
     var navigationService = provider.GetService<INavigationService>();
     var loginUrl = $"https://{location.Value()}web.dlas1.ucloud.int/";
 
-    var navigator = navigationService?.Login(username.Value(), password.Value(), loginUrl, false);
-    var navDriver = navigator?.WebDriver();
+    var navigator = navigationService.Login(username.Value(), password.Value(), loginUrl, false);
+    var navDriver = navigator.WebDriver();
 
-    if (closeDriver?.Value() is not null && string.Equals(closeDriver.Value()?.Trim(), "y"))
+    if (closeDriver.Value() is not null && string.Equals(closeDriver.Value().Trim(), "y"))
     {
-        navDriver?.Close();
+        navDriver.Close();
     }
 });
 

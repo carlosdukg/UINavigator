@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using System;
+using System.Linq;
 using UINavigator.Common.Contracts;
 
 namespace UINavigator.Common
@@ -29,14 +31,14 @@ namespace UINavigator.Common
             // first customer grid
             var masterGrid = _driver.FindElement(By.Id("ctl00_Content_masterCoGrid"));
             var tableRows = masterGrid.FindElements(By.TagName("tr"));
-            IWebElement? custLink = null;
+            IWebElement custLink = null;
             foreach(var row in tableRows.ToList().Skip(1))
             {
                 var rowColumns = row.FindElements(By.TagName("td"));
                 var codeColumn = rowColumns[0];
                 if (codeColumn != null && string.Equals(codeColumn.Text.Trim(), customerCode, StringComparison.OrdinalIgnoreCase))
                 {
-                    custLink = rowColumns[1]?.FindElement(By.TagName("a"));
+                    custLink = rowColumns[1].FindElement(By.TagName("a"));
                     break;
                 }
             }
@@ -53,7 +55,7 @@ namespace UINavigator.Common
             // second customer grid
             var contentGrid = _driver.FindElement(By.Id("ctl00_Content_componentCoGrid"));
             var contenTableRows = contentGrid.FindElements(By.TagName("tr"));
-            IWebElement? contentLink = null;
+            IWebElement contentLink = null;
             foreach (var row in contenTableRows.ToList().Skip(1))
             {
                 var rowColumns = row.FindElements(By.TagName("td"));
@@ -61,7 +63,7 @@ namespace UINavigator.Common
                 var codeValue = codeColumn.Text.Trim();
                 if (codeColumn != null && codeValue.StartsWith(customerCode, StringComparison.OrdinalIgnoreCase))
                 {
-                    contentLink = rowColumns[1]?.FindElement(By.TagName("a"));
+                    contentLink = rowColumns[1].FindElement(By.TagName("a"));
                     break;
                 }
             }

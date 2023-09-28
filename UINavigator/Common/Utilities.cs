@@ -1,4 +1,7 @@
-﻿using UINavigator.Common.Contracts;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UINavigator.Common.Contracts;
 using UINavigator.Models;
 using UINavigator.Models.UIModels;
 using UINavigator.Services;
@@ -69,7 +72,7 @@ namespace UINavigator.Common
             return empnum;
         }
 
-        public static double CalculateAnnualSalaryC(string? hour, string? rate)
+        public static double CalculateAnnualSalaryC(string hour, string rate)
         {
             if (hour != null && rate != null)
             {
@@ -78,7 +81,7 @@ namespace UINavigator.Common
             return 0;
         }
 
-        public static bool ValidateCoreAnnualSalary(string? hour, string? rate, string? salary)
+        public static bool ValidateCoreAnnualSalary(string hour, string rate, string salary)
         {
             if (hour != null && rate != null)
             {
@@ -98,21 +101,21 @@ namespace UINavigator.Common
         }
 
         /// <inheritdoc/>
-        public UIWizardStep? GetWizardStep(Enum stepName, EntryAction entryAction)
+        public UIWizardStep GetWizardStep(Enum stepName, EntryAction entryAction)
         {
-            var stepActions = entryAction?
-                .WizardSteps?
+            var stepActions = entryAction
+                .WizardSteps
                 .SingleOrDefault(s => string.Equals(s.Name, stepName.ToString(), StringComparison.OrdinalIgnoreCase));
 
             return stepActions;
         }
 
         /// <inheritdoc/>
-        public IEnumerable<UIWizardStep?> GetWizardSteps(UIAction entryAction)
+        public IEnumerable<UIWizardStep> GetWizardSteps(UIAction entryAction)
         {
-            var steps = entryAction?.WizardSteps;
+            var steps = entryAction.WizardSteps;
 
-            return steps ?? Enumerable.Empty<UIWizardStep?>();
+            return steps;
         }
 
         public string GetCache()

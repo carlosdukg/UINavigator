@@ -3,16 +3,18 @@ using Microsoft.Extensions.Caching.Memory;
 using UINavigator.Common;
 using UINavigator.Common.Contracts;
 using UltiProTests.Services;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 
 namespace UltiProTests.Tests.AdministrationTopMenu.EmployeeAdmin.MyEmployees
 {
     [TestClass]
     public class EmployeeTests
     {
-        private IWebDriver? _driver;
-        private ChromeWebDriver? _chormeDriver;
-        private IUtilitiesService? _utilities;
-        Navigation? _navigate;
+        private IWebDriver _driver;
+        private ChromeWebDriver _chormeDriver;
+        private IUtilitiesService _utilities;
+        Navigation _navigate;
 
         [TestInitialize]
         public void Initialize()
@@ -58,11 +60,11 @@ namespace UltiProTests.Tests.AdministrationTopMenu.EmployeeAdmin.MyEmployees
             }
 
             //*** navigate and login ***//               
-            _navigate?
-                .Login(uiTest?.Login?.Username, uiTest?.Login?.Password, uiTest?.Login?.Url, uiTest?.Login?.IsSSOUser);
+            _navigate
+                .Login(uiTest.Login.Username, uiTest.Login.Password, uiTest.Login.Url, uiTest.Login.IsSSOUser);
 
             //*** execute UI actions ***//
-            await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
+            await TestHelper.ProcessUIActionsAsync(uiTest.Actions, _driver, _utilities, _navigate);
         }
 
         [TestMethod]
@@ -77,11 +79,11 @@ namespace UltiProTests.Tests.AdministrationTopMenu.EmployeeAdmin.MyEmployees
             }
 
             //*** navigate and login ***//               
-            _navigate?
-                .Login(uiTest?.Login?.Username, uiTest?.Login?.Password, uiTest?.Login?.Url, uiTest?.Login?.IsSSOUser);
+            _navigate
+                .Login(uiTest.Login.Username, uiTest.Login.Password, uiTest.Login.Url, uiTest.Login.IsSSOUser);
 
             //*** execute UI actions ***//
-            await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
+            await TestHelper.ProcessUIActionsAsync(uiTest.Actions, _driver, _utilities, _navigate);
         }
 
         [TestMethod]
@@ -96,11 +98,11 @@ namespace UltiProTests.Tests.AdministrationTopMenu.EmployeeAdmin.MyEmployees
             }
 
             //*** navigate and login ***//               
-            _navigate?
-                .Login(uiTest?.Login?.Username, uiTest?.Login?.Password, uiTest?.Login?.Url, uiTest?.Login?.IsSSOUser);
+            _navigate
+                .Login(uiTest.Login.Username, uiTest.Login.Password, uiTest.Login.Url, uiTest.Login.IsSSOUser);
 
             //*** execute UI actions ***//
-            await TestHelper.ProcessUIActionsAsync(uiTest?.Actions, _driver, _utilities, _navigate);
+            await TestHelper.ProcessUIActionsAsync(uiTest.Actions, _driver, _utilities, _navigate);
         }
     }
 }
