@@ -2,7 +2,6 @@
 using OpenQA.Selenium;
 using System.Reflection;
 using UINavigator.Models.UIModels;
-using UINavigator.Common.Contracts;
 using UINavigator.Models.UI;
 using Newtonsoft.Json.Linq;
 
@@ -19,63 +18,9 @@ namespace UINavigator.Common
         /// Set HTML UI control.
         /// </summary>
         /// <param name="driver"></param>
-        /// <param name="step"></param>
-        /// <param name="utilities"></param>
-        /*public static void SetUIControl(this IWebDriver driver, UIWizardStep? step, IUtilitiesService? utilities)
-        {
-            if (step == null || utilities == null)
-            {
-                return;
-            }
-            var validControls = step.Controls?.Where(c => c != null);
-
-            if (validControls != null)
-            {
-                foreach (var control in validControls)
-                {
-                    try
-                    {
-                        ProcessControlAction(control, utilities, driver);
-                    }
-                    catch (ElementNotInteractableException)
-                    {
-                        //TODO: log error
-                    }
-                    catch (NoSuchElementException)
-                    {
-                        //TODO: log error
-                    }
-
-                    if (control.DelayInSeconds != null)
-                    {
-                        Thread.Sleep(TimeSpan.FromSeconds(control.DelayInSeconds.Value));
-                    }
-                }
-            }
-
-            if (step.MoveNext.HasValue && step.MoveNext.Value)
-            {
-                driver.MoveNext();
-            }
-
-            if (step.MovePrev.HasValue && step.MovePrev.Value)
-            {
-                driver.MovePrev();
-            }
-
-            if (step.DelayInSeconds != null)
-            {
-                Thread.Sleep(TimeSpan.FromSeconds(step.DelayInSeconds.Value));
-            }
-        }*/
-
-        /// <summary>
-        /// Set HTML UI control.
-        /// </summary>
-        /// <param name="driver"></param>
         /// <param name="utilities"></param>
         /// <param name="control"></param>
-        public static void SetUIControl(this IWebDriver driver, IUtilitiesService utilities, UIControl control)
+        public static void SetUIControl(this IWebDriver driver, UIControl control, object testMethods)
         {
             try
             {
@@ -89,7 +34,7 @@ namespace UINavigator.Common
                     Thread.Sleep(TimeSpan.FromSeconds(control.DelayInSeconds.Value));
                 }
 
-                ProcessControlAction(control, utilities, driver);
+                ProcessControlAction(control, testMethods, driver);
             }
             catch (ElementNotInteractableException)
             {
@@ -210,7 +155,7 @@ namespace UINavigator.Common
             }
         }
 
-        private static void ProcessControlAction(UIControl control, IUtilitiesService utilities, IWebDriver driver)
+        private static void ProcessControlAction(UIControl control, object utilities, IWebDriver driver)
         {
             if(control.DelayBeforeInSeconds != null)
             {
