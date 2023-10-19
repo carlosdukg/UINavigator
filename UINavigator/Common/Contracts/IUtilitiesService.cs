@@ -9,14 +9,6 @@ namespace UINavigator.Common.Contracts
     public interface IUtilitiesService
     {
         /// <summary>
-        /// Generates a unique social security number. 
-        /// </summary>
-        /// <returns></returns>
-        string GenerateSSN();
-
-        string GenerateSIN();
-
-        /// <summary>
         /// Get wizard step object from json test template.
         /// </summary>
         /// <param name="stepName">Wizard step name</param>
@@ -30,7 +22,5 @@ namespace UINavigator.Common.Contracts
         /// <param name="entryAction">Entry action object</param>
         /// <returns></returns>
         IEnumerable<UIWizardStep?> GetWizardSteps(UIAction entryAction);
-
-        string GetCache();
     }
 }
