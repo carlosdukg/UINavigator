@@ -8,14 +8,14 @@
 
         public EmployeeAdminMenu()
         {
-            _name = "EmployeAdmin";
+            _name = "EmployeeAdmin";
             _id = "346";
             _items = new List<MenuElement>
             {
                 new MenuElement
                 {
                     Id = "424",
-                    Name = "My Employes"
+                    Name = "MyEmployees"
                 }
             };
         }

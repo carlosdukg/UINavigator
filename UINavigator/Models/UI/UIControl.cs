@@ -14,6 +14,12 @@ namespace UINavigator.Models.UIModels
 
         public bool SetValueWithJScript { get; set; }
 
+        public string? Setter { get; set; }
+
+        public List<object>? SetterPatemeters { get; set; }
+
+        public object? MethodsClass { get; set; }
+
         public object? ObjectValue { get; set; }
 
         public int? DelayBeforeInSeconds { get; set; }
