@@ -1,5 +1,4 @@
-﻿
-namespace UINavigator.Common.Contracts
+﻿namespace UINavigator.Contracts
 {
     /// <summary>
     /// Customer selector service for SSO user.

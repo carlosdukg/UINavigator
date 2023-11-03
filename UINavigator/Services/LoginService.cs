@@ -1,10 +1,10 @@
 ﻿using OpenQA.Selenium;
-using UINavigator.Common.Contracts;
+using UINavigator.Contracts;
 
-namespace UINavigator.Common
+namespace UINavigator.Services
 {
     /// <inheritdoc/>
-    public class Login : ILoginService
+    public class LoginService : ILoginService
     {
         private readonly IWebDriver _driver;
         private readonly ICustomerSelectorService _customerSelector;
@@ -14,7 +14,7 @@ namespace UINavigator.Common
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="customerSelector"></param>
-        public Login(IWebDriver driver, ICustomerSelectorService customerSelector)
+        public LoginService(IWebDriver driver, ICustomerSelectorService customerSelector)
         {
             _driver = driver;
             _customerSelector = customerSelector;

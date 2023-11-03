@@ -1,9 +1,9 @@
-﻿namespace UINavigator.Services
+﻿namespace UINavigator.Contracts
 {
     /// <summary>
     /// Local cache service
     /// </summary>
-    public interface IMemCache
+    public interface IMemCacheService
     {
         /// <summary>
         /// Get cached value.
@@ -12,7 +12,7 @@
         /// <param name="key"></param>
         /// <returns></returns>
         T? Get<T>(string key);
-        
+
         /// <summary>
         /// Cache value locally in memory.
         /// </summary>

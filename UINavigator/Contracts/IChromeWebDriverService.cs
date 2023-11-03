@@ -1,11 +1,11 @@
 using OpenQA.Selenium;
 
-namespace UINavigator.Services
+namespace UINavigator.Contracts
 {
     /// <summary>
     /// Chrome broser web driver.
     /// </summary>
-    public interface IChromeWebDriver
+    public interface IChromeWebDriverService
     {
         IWebDriver GetDriver();
     }

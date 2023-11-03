@@ -1,44 +1,27 @@
-﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UINavigator.Models.Enums.Administration;
-
-namespace UINavigator.Menus.Administration
+﻿namespace UINavigator.Menus.Administration
 {
-    public class AdministrationMenu
+    internal class AdministrationMenu : ITopMenuItem
     {
-        private readonly IWebDriver _driver;
-        const string EmployeeAdmin = "346";
-        const string MyEmployees = "424";
+        private List<IMenuItem> _menuElements;
+        private readonly string _name;
+        private readonly string _id;
+        private readonly bool _isTopMenu;
 
-        public AdministrationMenu(IWebDriver driver)
+        public AdministrationMenu()
         {
-            _driver = driver;
-        }
+            _isTopMenu = true;
+            _id = "menu_admin";
+            _name = "Administration";
 
-        public void NavigateToPath(string path)
-        {
-            var navigationPoints = path.Split('>');
-            var menuElements = EmployeeAdminMenuOptions();
-            foreach (var navigation in navigationPoints)
+            _menuElements = new List<IMenuItem>
             {
-                if (menuElements.ContainsKey(navigation))
-                {
-                    menuElements[navigation].Click();
-                }
-            }
-        }
-
-        public Dictionary<string, IWebElement> EmployeeAdminMenuOptions()
-        {
-            return new Dictionary<string, IWebElement>
-            {
-                 { AdministrationMenuOption.EmployeeAdmin.ToString(), _driver.FindElement(By.Id(EmployeeAdmin)) },
-                 { AdministrationMenuOption.MyEmployees.ToString(), _driver.FindElement(By.Id(MyEmployees)) }
+                new EmployeeAdminMenu()
             };
         }
+
+        public bool IsTopMenu { get => _isTopMenu; }
+        public string? Id { get => _id; }
+        public string? Name { get => _name; }
+        public List<IMenuItem> Items { get => _menuElements; set => _menuElements = value; }
     }
 }

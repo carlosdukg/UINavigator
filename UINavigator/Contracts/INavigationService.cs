@@ -1,7 +1,8 @@
 ﻿using OpenQA.Selenium;
 using UINavigator.Models.UIModels;
+using UINavigator.Services;
 
-namespace UINavigator.Common.Contracts
+namespace UINavigator.Contracts
 {
     /// <summary>
     /// Navigation service.
@@ -15,14 +16,14 @@ namespace UINavigator.Common.Contracts
         /// <param name="password">Password</param>
         /// <param name="location">Site login URL</param>
         /// <param name="isSSOUser">Flag to indicate if the user is SSO</param>
-        Navigation Login(string? username, string? password, string? location, bool? isSSOUser);
+        NavigationService Login(string? username, string? password, string? location, bool? isSSOUser);
 
         /// <summary>
         /// Navigate web application on specific route path.
         /// </summary>
         /// <param name="navigation"></param>
         /// <returns></returns>
-        Navigation Path(UINavigation navigation);
+        NavigationService Path(UINavigation navigation);
 
         /// <summary>
         /// Selenium web driver.
