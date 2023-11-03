@@ -49,14 +49,18 @@ namespace UINavigator.Services
                 return this;
             }
 
-            var navigationPoints = navigation.Path.Split('>');
-            foreach (var point in navigationPoints)
+            var navigationPointLevels = navigation.Path.Split('>');
+          
+            var item = topMenu?.Items.SingleOrDefault(m => m?.Name?.ToLower() == navigationPointLevels[0].ToLower());
+            if (item != null)
             {
-                var item = topMenu?.Items.SingleOrDefault(m => m?.Name?.ToLower() == point.ToLower());
-                if (item != null)
-                {
-                    _driver.FindElement(By.Id(item.Id)).Click();
-                }
+                _driver.FindElement(By.Id(item.Id)).Click();
+            }
+
+            var subitem = item?.Items.SingleOrDefault(m => m?.Name?.ToLower() == navigationPointLevels[1].ToLower());
+            if (subitem != null)
+            {
+                _driver.FindElement(By.Id(subitem.Id)).Click();
             }
 
             return this;

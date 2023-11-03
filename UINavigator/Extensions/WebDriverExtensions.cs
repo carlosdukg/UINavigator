@@ -168,18 +168,42 @@ namespace UINavigator.Extensions
                     {
                         var input = control.Id == null ? driver.FindElement(By.Id(control.Name)) : driver.FindElement(By.Id(control.Id));
 
-                        if (control.Value == "")
+                        if (control.Value == "" && string.IsNullOrWhiteSpace(control.Setter) && control.MethodsClass == null)
                         {
                             input.Clear();
                         }
                         else if (control.Value != null && control.SetValueWithJScript)
                         {
-                            var value = control.Value.Substring(control.Value.IndexOf(":") + 1);
                             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                             input.SendKeys(Keys.Return);
-                            js.ExecuteScript($"document.getElementById('{control.Id}').value = '${value}'");
+                            js.ExecuteScript($"document.getElementById('{control.Id}').value = '${control.Value}'");
                             js.ExecuteScript($"document.getElementById('{control.Id}').dispatchEvent(new Event('change'))");
                             Thread.Sleep(TimeSpan.FromSeconds(1));
+                            driver.FindElement(By.XPath("//html")).Click();
+                        }
+                        else if (!string.IsNullOrWhiteSpace(control.Setter) && control.MethodsClass != null)
+                        {
+                            var methodName = control.Setter.Trim();
+                            Type myEmpType = control.MethodsClass.GetType();
+                            MethodInfo? ctrlMethod = myEmpType.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
+
+                            var controlValue = string.Empty;
+                            if (ctrlMethod != null)
+                            {
+                                if (control.SetterPatemeters != null && control.SetterPatemeters.Any())
+                                {
+                                    controlValue = (string?)ctrlMethod.Invoke(control.MethodsClass, control.SetterPatemeters.ToArray());
+                                }
+                                else
+                                {
+                                    controlValue = (string?)ctrlMethod.Invoke(control.MethodsClass, null);
+                                }
+                            }
+
+                            Thread.Sleep(TimeSpan.FromSeconds(1));
+                            input.SendKeys(controlValue);
+
+                            // exit out the input to fire events if needed
                             driver.FindElement(By.XPath("//html")).Click();
                         }
                         else if (control.Value != null)
