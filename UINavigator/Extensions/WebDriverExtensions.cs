@@ -5,7 +5,7 @@ using UINavigator.Models.UIModels;
 using UINavigator.Models.UI;
 using Newtonsoft.Json.Linq;
 
-namespace UINavigator.Common
+namespace UINavigator.Extensions
 {
     /// <summary>
     /// Selenium web driver extensions.
@@ -20,7 +20,7 @@ namespace UINavigator.Common
         /// <param name="driver"></param>
         /// <param name="utilities"></param>
         /// <param name="control"></param>
-        public static void SetUIControl(this IWebDriver driver, UIControl control, object testMethods)
+        public static void SetUIControl(this IWebDriver driver, UIControl control)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace UINavigator.Common
                     Thread.Sleep(TimeSpan.FromSeconds(control.DelayInSeconds.Value));
                 }
 
-                ProcessControlAction(control, testMethods, driver);
+                ProcessControlAction(control, driver);
             }
             catch (ElementNotInteractableException)
             {
@@ -155,9 +155,9 @@ namespace UINavigator.Common
             }
         }
 
-        private static void ProcessControlAction(UIControl control, object utilities, IWebDriver driver)
+        private static void ProcessControlAction(UIControl control, IWebDriver driver)
         {
-            if(control.DelayBeforeInSeconds != null)
+            if (control.DelayBeforeInSeconds != null)
             {
                 Thread.Sleep(TimeSpan.FromSeconds(control.DelayBeforeInSeconds.Value));
             }
@@ -167,59 +167,29 @@ namespace UINavigator.Common
                 case ControlType.Input:
                     {
                         var input = control.Id == null ? driver.FindElement(By.Id(control.Name)) : driver.FindElement(By.Id(control.Id));
-                        if (control.Value != null && control.Value.StartsWith("method:"))
+
+                        if (control.Value == "")
                         {
-                            var methodName = control.Value.Replace("method:", "").Trim();
-                            Type myEmpType = utilities.GetType();
-                            MethodInfo? ctrlMethod = myEmpType.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
-
-                            var paramIndex = control.Value.IndexOf("#");
-                            var param = paramIndex == -1 ? "" : control.Value.Substring(control.Value.IndexOf("#") + 1).Trim();
-
-                            var controlValue = string.Empty;
-                            if (ctrlMethod != null)
-                            {
-                                if (!string.IsNullOrWhiteSpace(param))
-                                {
-                                    controlValue = (string?)ctrlMethod.Invoke(utilities, new[] { param });
-                                }
-                                else
-                                {
-                                    controlValue = (string?)ctrlMethod.Invoke(utilities, null);
-                                }
-                            }
-
+                            input.Clear();
+                        }
+                        else if (control.Value != null && control.SetValueWithJScript)
+                        {
+                            var value = control.Value.Substring(control.Value.IndexOf(":") + 1);
+                            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                            input.SendKeys(Keys.Return);
+                            js.ExecuteScript($"document.getElementById('{control.Id}').value = '${value}'");
+                            js.ExecuteScript($"document.getElementById('{control.Id}').dispatchEvent(new Event('change'))");
                             Thread.Sleep(TimeSpan.FromSeconds(1));
-                            input.SendKeys(controlValue);
+                            driver.FindElement(By.XPath("//html")).Click();
+                        }
+                        else if (control.Value != null)
+                        {
+                            input.Clear();
+                            Thread.Sleep(TimeSpan.FromSeconds(1));
+                            input.SendKeys(control.Value);
 
                             // exit out the input to fire events if needed
                             driver.FindElement(By.XPath("//html")).Click();
-                        }
-                        else
-                        {
-                            if (control.Value == "")
-                            {
-                                input.Clear();
-                            }
-                            else if (control.Value != null && control.Value.StartsWith("script:"))
-                            {
-                                var value = control.Value.Substring(control.Value.IndexOf(":") + 1);
-                                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                                input.SendKeys(Keys.Return);
-                                js.ExecuteScript($"document.getElementById('{control.Id}').value = '${value}'");
-                                js.ExecuteScript($"document.getElementById('{control.Id}').dispatchEvent(new Event('change'))");
-                                Thread.Sleep(TimeSpan.FromSeconds(1));
-                                driver.FindElement(By.XPath("//html")).Click();
-                            }
-                            else if(control.Value != null)
-                            {
-                                input.Clear();
-                                Thread.Sleep(TimeSpan.FromSeconds(1));
-                                input.SendKeys(control.Value);
-
-                                // exit out the input to fire events if needed
-                                driver.FindElement(By.XPath("//html")).Click();
-                            }
                         }
                         break;
                     }
@@ -250,9 +220,9 @@ namespace UINavigator.Common
                         if (control.ObjectValue != null)
                         {
                             var gridValue = ((JObject)control.ObjectValue).ToObject<GridValue>();
-                            if (gridValue?.Search?.FindByContorlId !=null && !string.IsNullOrWhiteSpace(gridValue?.Search?.FindByControlValue))
+                            if (gridValue?.Search?.FindByContorlId != null && !string.IsNullOrWhiteSpace(gridValue?.Search?.FindByControlValue))
                             {
-                                var findByControl = driver.FindElement(By.Id(gridValue?.Search?.FindByContorlId));                            
+                                var findByControl = driver.FindElement(By.Id(gridValue?.Search?.FindByContorlId));
                                 var findByDropdown = new SelectElement(findByControl);
                                 findByDropdown.SelectByValue(gridValue?.Search.FindByControlValue);
                             }
@@ -260,7 +230,7 @@ namespace UINavigator.Common
                             if (gridValue?.Search?.OperatorControlId != null && !string.IsNullOrWhiteSpace(gridValue?.Search?.OperatorControlValue))
                             {
                                 var operatorControl = driver.FindElement(By.Id(gridValue?.Search?.OperatorControlId));
-                                var operatorDropdown = new SelectElement(operatorControl);                           
+                                var operatorDropdown = new SelectElement(operatorControl);
                                 operatorDropdown.SelectByValue(gridValue?.Search?.OperatorControlValue);
                             }
 
@@ -280,7 +250,7 @@ namespace UINavigator.Common
 
                             if (gridValue?.Search?.SearchInputControlId != null && !string.IsNullOrWhiteSpace(gridValue?.Search?.SearchInputControlValue))
                             {
-                                var searchInput = driver.FindElement(By.Id(gridValue?.Search?.SearchInputControlId));                            
+                                var searchInput = driver.FindElement(By.Id(gridValue?.Search?.SearchInputControlId));
                                 searchInput.SendKeys(gridValue?.Search?.SearchInputControlValue);
                             }
 

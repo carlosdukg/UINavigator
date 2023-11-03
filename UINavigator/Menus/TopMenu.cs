@@ -1,44 +1,34 @@
 ﻿using OpenQA.Selenium;
+using UINavigator.Menus.Administration;
 using UINavigator.Models.Enums.Site;
 
 namespace UINavigator.Menus
 {
+    /// <summary>
+    /// Top menu fabric
+    /// </summary>
     public class TopMenu
     {
-        private readonly IWebDriver _driver;
-        const string Administration = "menu_admin";
-        const string MyTeam = "menu_my_team";
-        const string MySelf = "menu_myself";
-        const string SystemConfiguration = "menu_sys_cfg";
-        const string Favorites = "menu_favorites";
-        public TopMenu(IWebDriver driver)
-        {
-            _driver = driver;
-        }
+        public TopMenu() { }
 
-        public void NavigateToPath(string path)
+        public static ITopMenuItem? GetTopMenu(TopMenuOption menuName)
         {
-            var navigationPoints = path.Split('>');
-            var menuElements = TopMenuOptions();
-            foreach (var navigation in navigationPoints)
+            ITopMenuItem? menu = null;
+            switch (menuName)
             {
-                if (menuElements.ContainsKey(navigation))
-                {
-                    menuElements[navigation].Click();
-                }
+                case TopMenuOption.Administration:
+                    menu = new AdministrationMenu();
+                    break;
+                case TopMenuOption.MyTeam:
+                    menu = new AdministrationMenu();
+                    break;
+                case TopMenuOption.MySelf:
+                    menu = new AdministrationMenu();
+                    break;
+                default:
+                    throw new NotFoundException();
             }
-        }
-
-        public Dictionary<string, IWebElement> TopMenuOptions()
-        {
-            return new Dictionary<string, IWebElement>
-            {
-                { TopMenuOption.Administration.ToString(), _driver.FindElement(By.Id(Administration)) },
-                { TopMenuOption.MyTeam.ToString(), _driver.FindElement(By.Id(MyTeam)) },
-                { TopMenuOption.MySelf.ToString(), _driver.FindElement(By.Id(MySelf)) },
-                //{ TopMenuOption.SystemConfiguration.ToString(), _driver.FindElement(By.Id(SystemConfiguration)) },
-                { TopMenuOption.Favorites.ToString(), _driver.FindElement(By.Id(Favorites)) }
-            };
+            return menu;
         }
     }
 }
