@@ -18,20 +18,20 @@ namespace UINavigator.Menus.Employee
         const string EmployeeSummaryId = "17";
 
         private List<MenuElement> _menuElements;
-        private readonly string? _id;
         private readonly string _name;
 
         List<MenuElement> IMenuItem.Items { get => _menuElements; set => _menuElements = value; }
 
-        public string?Id => _id;
+        public string?Id;
 
         public string Name => _name;
+
+        string? IMenuItem.Id => throw new NotImplementedException();
 
         public EmployeeMenu(IWebDriver driver)
         {
             _driver = driver;
             _name = "EmployeeMenu";
-
             _menuElements = new List<MenuElement>
             {
                 new MenuElement
