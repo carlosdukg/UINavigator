@@ -17,11 +17,11 @@ namespace UINavigator.Menus.Employee
         const string PersonalId = "338";
         const string EmployeeSummaryId = "17";
 
-        private readonly List<MenuElement> _menuElements;
-        private readonly string _id;
+        private List<MenuElement> _menuElements;
+        private readonly string? _id;
         private readonly string _name;
 
-        List<MenuElement> IMenuItem.Items { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        List<MenuElement> IMenuItem.Items { get => _menuElements; set => _menuElements = value; }
 
         public string?Id => _id;
 
