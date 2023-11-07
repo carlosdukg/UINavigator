@@ -29,9 +29,9 @@ namespace UINavigator.Extensions
                     return;
                 }
 
-                if (control.DelayAfterRender != null)
+                if (control.DelayAfterValue != null)
                 {
-                    Thread.Sleep(TimeSpan.FromSeconds(control.DelayAfterRender.Value));
+                    Thread.Sleep(TimeSpan.FromSeconds(control.DelayAfterValue.Value));
                 }
 
                 ProcessControlAction(control, driver);

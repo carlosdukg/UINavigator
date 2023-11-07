@@ -27,7 +27,7 @@ namespace UINavigator.Models.UIModels
         /// <summary>
         /// Use custom method logic to set control value.
         /// </summary>
-        public UISetValueMehod? SetValueMethod { get; set; }
+        public UIValueMehod? SetValueMethod { get; set; }
         /// <summary>
         /// Complex control value, 
         /// object definition will be evaluated based on the control type.
@@ -40,21 +40,25 @@ namespace UINavigator.Models.UIModels
         /// <summary>
         /// Delay after setting control value/acion.
         /// </summary>
-        public int? DelayAfterRender { get; set; }
+        public int? DelayAfterValue { get; set; }
         /// <summary>
-        /// Validate other controls present in the same page.
+        /// Control value/s to validate
         /// </summary>
-        public UIValidate? ValidateControls { get; set; }
+        public UIValidateControl? ValidateControlValue {get; set;}       
         /// <summary>
-        /// Validate error message/s display.
+        /// Other controls present in the same page to be validated.
+        /// </summary>
+        public UIValidateControls? ValidateOtherControls { get; set; }
+        /// <summary>
+        /// Error message/s to display.
         /// </summary>
         public List<string>? ErrorMessages { get; set; }
         /// <summary>
-        /// Validate information message/s display.
+        /// Information message/s to display.
         /// </summary>
         public List<string>? InfoMessages { get; set; }
         /// <summary>
-        /// Validate warning message/s display.
+        /// Warning message/s to display.
         /// </summary>
         public List<string>? WarningMessages { get; set; }
     }
