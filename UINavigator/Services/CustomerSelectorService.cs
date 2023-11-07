@@ -1,10 +1,10 @@
 ﻿using OpenQA.Selenium;
-using UINavigator.Common.Contracts;
+using UINavigator.Contracts;
 
-namespace UINavigator.Common
+namespace UINavigator.Services
 {
     /// <inheritdoc/>
-    public class CustomerSelector : ICustomerSelectorService
+    public class CustomerSelectorService : ICustomerSelectorService
     {
         private readonly IWebDriver _driver;
 
@@ -12,7 +12,7 @@ namespace UINavigator.Common
         /// Creates a new instance of the CustomerSelector.
         /// </summary>
         /// <param name="driver"></param>
-        public CustomerSelector(IWebDriver driver)
+        public CustomerSelectorService(IWebDriver driver)
         {
             _driver = driver;
         }
@@ -30,7 +30,7 @@ namespace UINavigator.Common
             var masterGrid = _driver.FindElement(By.Id("ctl00_Content_masterCoGrid"));
             var tableRows = masterGrid.FindElements(By.TagName("tr"));
             IWebElement? custLink = null;
-            foreach(var row in tableRows.ToList().Skip(1))
+            foreach (var row in tableRows.ToList().Skip(1))
             {
                 var rowColumns = row.FindElements(By.TagName("td"));
                 var codeColumn = rowColumns[0];

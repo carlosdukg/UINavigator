@@ -1,5 +1,4 @@
-﻿
-namespace UINavigator.Common.Contracts
+﻿namespace UINavigator.Contracts
 {
     /// <summary>
     /// Site login service
