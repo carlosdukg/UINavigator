@@ -9,6 +9,7 @@ namespace UINavigator.Models.Enums
     public enum DataTypes
     {
         Unknown,
+        Void,
         Int,
         Double,
         String,
