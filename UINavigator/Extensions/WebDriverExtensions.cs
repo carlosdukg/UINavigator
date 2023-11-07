@@ -29,9 +29,9 @@ namespace UINavigator.Extensions
                     return;
                 }
 
-                if (control.DelayInSeconds != null)
+                if (control.DelayAfterRender != null)
                 {
-                    Thread.Sleep(TimeSpan.FromSeconds(control.DelayInSeconds.Value));
+                    Thread.Sleep(TimeSpan.FromSeconds(control.DelayAfterRender.Value));
                 }
 
                 ProcessControlAction(control, driver);
@@ -157,9 +157,9 @@ namespace UINavigator.Extensions
 
         private static void ProcessControlAction(UIControl control, IWebDriver driver)
         {
-            if (control.DelayBeforeInSeconds != null)
+            if (control.DelayBeforeValue != null)
             {
-                Thread.Sleep(TimeSpan.FromSeconds(control.DelayBeforeInSeconds.Value));
+                Thread.Sleep(TimeSpan.FromSeconds(control.DelayBeforeValue.Value));
             }
 
             switch (control.Type)
@@ -168,7 +168,7 @@ namespace UINavigator.Extensions
                     {
                         var input = control.Id == null ? driver.FindElement(By.Id(control.Name)) : driver.FindElement(By.Id(control.Id));
 
-                        if (control.Value == "" && string.IsNullOrWhiteSpace(control.Setter) && control.MethodsClass == null)
+                        if (control.Value == "" && control.SetValueMethod != null)
                         {
                             input.Clear();
                         }
@@ -181,22 +181,29 @@ namespace UINavigator.Extensions
                             Thread.Sleep(TimeSpan.FromSeconds(1));
                             driver.FindElement(By.XPath("//html")).Click();
                         }
-                        else if (!string.IsNullOrWhiteSpace(control.Setter) && control.MethodsClass != null)
+                        else if (control.SetValueMethod != null)
                         {
-                            var methodName = control.Setter.Trim();
-                            Type myEmpType = control.MethodsClass.GetType();
+                            var methodName = control.SetValueMethod.MethodName?.Trim();
+                            Type? myEmpType = control.SetValueMethod.MethodClass?.GetType();
+
+                            if (methodName == null || myEmpType == null)
+                            {
+                                return;
+                            }
                             MethodInfo? ctrlMethod = myEmpType.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
 
                             var controlValue = string.Empty;
                             if (ctrlMethod != null)
                             {
-                                if (control.SetterPatemeters != null && control.SetterPatemeters.Any())
+                                if (control.SetValueMethod.MethodParameters != null && control.SetValueMethod.MethodParameters.Any())
                                 {
-                                    controlValue = (string?)ctrlMethod.Invoke(control.MethodsClass, control.SetterPatemeters.ToArray());
+                                    controlValue = (string?)ctrlMethod.Invoke(
+                                        control.SetValueMethod.MethodClass,
+                                        control.SetValueMethod.MethodParameters);
                                 }
                                 else
                                 {
-                                    controlValue = (string?)ctrlMethod.Invoke(control.MethodsClass, null);
+                                    controlValue = (string?)ctrlMethod.Invoke(control.SetValueMethod.MethodClass, null);
                                 }
                             }
 
@@ -233,7 +240,7 @@ namespace UINavigator.Extensions
                         radio.Click();
                         break;
                     }
-                case ControlType.ButtonClick:
+                case ControlType.Button:
                     {
                         var button = control.Id == null ? driver.FindElement(By.Id(control.Name)) : driver.FindElement(By.Id(control.Id));
                         button.Click();
