@@ -7,7 +7,7 @@ namespace UINavigator.Models.UIModels
         Dropdown,
         Input,
         Radio,
-        ButtonClick,
+        Button,
         GridSearchAndSelect,
         GridViewAndSelect,
         SwitchFrame,
