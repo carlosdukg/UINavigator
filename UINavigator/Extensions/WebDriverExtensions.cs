@@ -168,11 +168,11 @@ namespace UINavigator.Extensions
                     {
                         var input = control.Id == null ? driver.FindElement(By.Id(control.Name)) : driver.FindElement(By.Id(control.Id));
 
-                        if (control.Value == "" && control.SetValueMethod != null)
+                        if (string.IsNullOrEmpty(control.Value) && control.SetValueMethod == null)
                         {
                             input.Clear();
                         }
-                        else if (control.Value != null && control.SetValueWithJScript)
+                        else if (!string.IsNullOrWhiteSpace(control.Value) && control.SetValueWithJScript)
                         {
                             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
                             input.SendKeys(Keys.Return);
@@ -183,28 +183,32 @@ namespace UINavigator.Extensions
                         }
                         else if (control.SetValueMethod != null)
                         {
-                            var methodName = control.SetValueMethod.MethodName?.Trim();
-                            Type? myEmpType = control.SetValueMethod.MethodClass?.GetType();
-
-                            if (methodName == null || myEmpType == null)
+                            var methodName = control.SetValueMethod.MethodName?.Trim();                           
+                            if (string.IsNullOrEmpty(methodName))
                             {
-                                return;
+                                throw new MissingFieldException("SetValueMethod: invalid or empty method name");
                             }
-                            MethodInfo? ctrlMethod = myEmpType.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
-
-                            var controlValue = string.Empty;
-                            if (ctrlMethod != null)
+                            Type? myEmpType = control.SetValueMethod.MethodClass?.GetType();
+                            if (myEmpType == null)
                             {
-                                if (control.SetValueMethod.MethodParameters != null && control.SetValueMethod.MethodParameters.Any())
-                                {
-                                    controlValue = (string?)ctrlMethod.Invoke(
-                                        control.SetValueMethod.MethodClass,
-                                        control.SetValueMethod.MethodParameters);
-                                }
-                                else
-                                {
-                                    controlValue = (string?)ctrlMethod.Invoke(control.SetValueMethod.MethodClass, null);
-                                }
+                                throw new ArgumentException("SetValueMethod: cannot infer class type from class object");
+                            }
+                            MethodInfo? ctrlMethod = myEmpType?.GetMethod(methodName, BindingFlags.Public | BindingFlags.Instance);
+                            if (ctrlMethod == null)
+                            {
+                                throw new ArgumentException("SetValueMethod: cannot get method from class type");
+                            }
+
+                            string? controlValue;
+                            if (control.SetValueMethod.MethodParameters != null && control.SetValueMethod.MethodParameters.Any())
+                            {
+                                controlValue = (string?)ctrlMethod?.Invoke(
+                                    control.SetValueMethod.MethodClass,
+                                    control.SetValueMethod.MethodParameters);
+                            }
+                            else
+                            {
+                                controlValue = (string?)ctrlMethod?.Invoke(control.SetValueMethod.MethodClass, null);
                             }
 
                             Thread.Sleep(TimeSpan.FromSeconds(1));
